@@ -7,79 +7,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-
-body{
-  font-family:'Inter',sans-serif;
-  min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  padding:2rem 1rem;
-  position:relative;overflow-x:hidden;
-}
-
-.bg{
-  position:fixed;inset:0;
-  background-image:url('https://raw.githubusercontent.com/Prof-Diego-Prado/convitesalao/main/convite%20erika.jpeg');
-  background-size:cover;background-position:center top;z-index:0;
-}
-.bg::after{
-  content:'';position:absolute;inset:0;
-  background:rgba(10,8,6,0.60);
-  backdrop-filter:blur(2px);
-}
-
+body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem 1rem;position:relative;overflow-x:hidden;}
+.bg{position:fixed;inset:0;background-image:url('https://raw.githubusercontent.com/Prof-Diego-Prado/convitesalao/main/convite%20erika.jpeg');background-size:cover;background-position:center top;z-index:0;}
+.bg::after{content:'';position:absolute;inset:0;background:rgba(10,8,6,0.60);backdrop-filter:blur(2px);}
 .page-wrap{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;gap:2rem;}
-
 .hero-text{text-align:center;color:#fff;}
 .hero-date{font-family:'Playfair Display',serif;font-size:80px;font-weight:700;line-height:1;letter-spacing:-3px;}
 .hero-line{width:60px;height:1px;background:rgba(255,255,255,0.4);margin:8px auto;}
 .hero-month{font-family:'Playfair Display',serif;font-size:28px;letter-spacing:8px;color:rgba(255,255,255,0.85);}
 .hero-sub{font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px;}
 .hero-script{font-family:'Dancing Script',cursive;font-size:34px;color:rgba(255,255,255,0.92);margin-top:1rem;}
-
-.btn-confirm{
-  background:#fff;color:#1a1a1a;border:none;border-radius:50px;
-  padding:16px 48px;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;
-  cursor:pointer;letter-spacing:0.5px;transition:all .2s;
-  box-shadow:0 4px 24px rgba(0,0,0,0.35);
-}
+.btn-confirm{background:#fff;color:#1a1a1a;border:none;border-radius:50px;padding:16px 48px;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;cursor:pointer;letter-spacing:0.5px;transition:all .2s;box-shadow:0 4px 24px rgba(0,0,0,0.35);}
 .btn-confirm:hover{background:#f0ede8;transform:translateY(-1px);}
 
-/* ── MODAL ── */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,0.6);
-  z-index:100;display:flex;align-items:center;justify-content:center;
-  padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s;
-}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s;}
 .modal-overlay.open{opacity:1;pointer-events:all;}
-
-.modal{
-  background:#fff;border-radius:20px;width:100%;max-width:420px;
-  display:flex;flex-direction:column;
-  max-height:calc(100dvh - 2rem);
-  transform:translateY(20px);transition:transform .25s;
-  overflow:hidden;
-}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:420px;display:flex;flex-direction:column;max-height:calc(100dvh - 2rem);transform:translateY(20px);transition:transform .25s;overflow:hidden;}
 .modal-overlay.open .modal{transform:translateY(0);}
-
 .modal-header{background:#1a1a1a;padding:1.4rem 1.5rem 1.2rem;text-align:center;flex-shrink:0;}
 .modal-title{font-family:'Dancing Script',cursive;font-size:26px;color:#fff;}
 .modal-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-top:3px;}
-
 .modal-scroll{overflow-y:auto;flex:1;padding:1.4rem;}
 
-/* form */
 .form-group{margin-bottom:1.1rem;}
 label{display:block;font-size:13px;color:#888;margin-bottom:5px;}
-input[type="text"]{
-  width:100%;padding:12px 14px;border:1px solid #e5e3df;border-radius:10px;
-  font-size:15px;font-family:'Inter',sans-serif;background:#faf8f5;color:#1a1a1a;
-  outline:none;transition:border-color .2s;
-}
+input[type="text"]{width:100%;padding:12px 14px;border:1px solid #e5e3df;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;background:#faf8f5;color:#1a1a1a;outline:none;transition:border-color .2s;}
 input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
 .error-msg{font-size:12px;color:#c0392b;margin-top:4px;display:none;}
-
-.btn{width:100%;padding:14px;border-radius:10px;border:none;cursor:pointer;
-  font-family:'Inter',sans-serif;font-size:15px;font-weight:500;transition:all .2s;display:block;}
+.btn{width:100%;padding:14px;border-radius:10px;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;transition:all .2s;display:block;}
 .btn+.btn{margin-top:10px;}
 .btn-dark{background:#1a1a1a;color:#fff;}
 .btn-dark:hover{background:#000;}
@@ -87,11 +43,9 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
 .btn-ghost{background:transparent;color:#999;border:1px solid #e5e3df;}
 .btn-ghost:hover{background:#faf8f5;color:#666;}
 
-/* success */
 .success-wrap{display:none;}
 .success-wrap.show{display:block;}
 .form-wrap.hide{display:none;}
-
 .success-top{text-align:center;padding-bottom:1.2rem;border-bottom:1px solid #f0ede8;margin-bottom:1.2rem;}
 .success-icon{width:52px;height:52px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
 .success-icon svg{width:24px;height:24px;}
@@ -103,45 +57,17 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
 .story-frame{position:relative;width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#111;}
 .story-frame canvas{display:block;width:100%;height:100%;}
 
-.story-actions{display:flex;gap:8px;margin-top:10px;}
-.btn-story{
-  flex:1;padding:11px;border-radius:10px;border:1px solid #e5e3df;
-  background:#faf8f5;color:#444;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;
-  cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;
-}
-.btn-story:hover{background:#f0ede8;border-color:#ccc;}
-
 .section-divider{border-top:1px solid #f0ede8;padding-top:1.2rem;margin-top:0.4rem;margin-bottom:1rem;}
 .section-tag{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#bbb;text-align:center;margin-bottom:12px;}
-
-.btn-whatsapp{
-  width:100%;padding:14px;border-radius:10px;border:none;
-  background:#25D366;color:#fff;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  font-family:'Inter',sans-serif;font-size:15px;font-weight:500;
-  cursor:pointer;text-decoration:none;transition:background .2s;
-}
+.btn-whatsapp{width:100%;padding:14px;border-radius:10px;border:none;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .2s;}
 .btn-whatsapp:hover{background:#1ebe5d;}
 
-/* ── SIDEBAR ── */
-.sidebar-toggle{
-  position:fixed;right:0;top:50%;transform:translateY(-50%);
-  background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);
-  color:#fff;border:1px solid rgba(255,255,255,0.2);border-right:none;
-  border-radius:12px 0 0 12px;padding:16px 10px;cursor:pointer;z-index:50;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  font-family:'Inter',sans-serif;font-size:11px;font-weight:500;
-  writing-mode:vertical-rl;transition:background .2s;
-}
+/* SIDEBAR */
+.sidebar-toggle{position:fixed;right:0;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,0.2);border-right:none;border-radius:12px 0 0 12px;padding:16px 10px;cursor:pointer;z-index:50;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:500;writing-mode:vertical-rl;transition:background .2s;}
 .sidebar-toggle:hover{background:rgba(255,255,255,0.25);}
 .badge{background:#c0392b;color:#fff;border-radius:20px;padding:2px 7px;font-size:11px;font-weight:600;writing-mode:horizontal-tb;min-width:20px;text-align:center;}
 .badge.hidden{display:none;}
-
-.sidebar{
-  position:fixed;right:-320px;top:0;height:100%;width:300px;
-  background:#fff;box-shadow:-4px 0 30px rgba(0,0,0,0.2);
-  z-index:200;transition:right .3s ease;display:flex;flex-direction:column;
-}
+.sidebar{position:fixed;right:-320px;top:0;height:100%;width:300px;background:#fff;box-shadow:-4px 0 30px rgba(0,0,0,0.2);z-index:200;transition:right .3s ease;display:flex;flex-direction:column;}
 .sidebar.open{right:0;}
 .sidebar-header{background:#1a1a1a;padding:1.5rem 1.2rem 1.2rem;flex-shrink:0;}
 .sidebar-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
@@ -149,21 +75,11 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
 .sidebar-close{background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:22px;line-height:1;}
 .sidebar-close:hover{color:#fff;}
 .sidebar-count{font-size:12px;color:rgba(255,255,255,0.5);}
-.sidebar-admin-btn{
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  margin-top:10px;padding:7px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
-  background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);
-  font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;transition:all .2s;width:100%;
-}
+.sidebar-admin-btn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;padding:7px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;transition:all .2s;width:100%;}
 .sidebar-admin-btn:hover{background:rgba(255,255,255,0.15);color:#fff;}
-
 .sidebar-body{flex:1;overflow-y:auto;}
 .guest-list{list-style:none;}
-.guest-item{
-  display:flex;align-items:center;gap:10px;
-  padding:11px 1.2rem;border-bottom:1px solid #f5f3f0;
-  animation:fadeIn .3s ease;
-}
+.guest-item{display:flex;align-items:center;gap:10px;padding:11px 1.2rem;border-bottom:1px solid #f5f3f0;animation:fadeIn .3s ease;}
 .guest-item:last-child{border-bottom:none;}
 @keyframes fadeIn{from{opacity:0;transform:translateX(10px);}to{opacity:1;transform:translateX(0);}}
 .guest-avatar{width:34px;height:34px;border-radius:50%;background:#f0ede8;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#1a1a1a;flex-shrink:0;}
@@ -174,55 +90,31 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
 .guest-del{background:none;border:none;color:#ddd;cursor:pointer;font-size:16px;padding:0 4px;flex-shrink:0;}
 .guest-del:hover{color:#c0392b;}
 .empty-list{text-align:center;padding:3rem 1.5rem;color:#bbb;font-size:13px;line-height:1.6;}
-
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:49;opacity:0;pointer-events:none;transition:opacity .3s;}
 .overlay.visible{opacity:1;pointer-events:all;}
 
-/* ── ADMIN MODAL ── */
-.admin-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,0.7);
-  z-index:300;display:flex;align-items:center;justify-content:center;
-  padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s;
-}
+/* ADMIN */
+.admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s;}
 .admin-overlay.open{opacity:1;pointer-events:all;}
-.admin-box{
-  background:#fff;border-radius:16px;width:100%;max-width:360px;
-  padding:1.8rem;transform:scale(0.95);transition:transform .2s;
-}
+.admin-box{background:#fff;border-radius:16px;width:100%;max-width:360px;padding:1.8rem;transform:scale(0.95);transition:transform .2s;}
 .admin-overlay.open .admin-box{transform:scale(1);}
 .admin-title{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:4px;text-align:center;}
 .admin-sub{font-size:13px;color:#aaa;text-align:center;margin-bottom:1.4rem;}
-.admin-input{
-  width:100%;padding:11px 14px;border:1px solid #e5e3df;border-radius:10px;
-  font-size:14px;font-family:'Inter',sans-serif;background:#faf8f5;color:#1a1a1a;
-  outline:none;margin-bottom:10px;transition:border-color .2s;
-}
+.admin-input{width:100%;padding:11px 14px;border:1px solid #e5e3df;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;background:#faf8f5;color:#1a1a1a;outline:none;margin-bottom:10px;transition:border-color .2s;}
 .admin-input:focus{border-color:#1a1a1a;}
 .admin-err{font-size:12px;color:#c0392b;text-align:center;margin-bottom:10px;display:none;}
 .admin-actions{display:flex;gap:8px;margin-top:4px;}
 .btn-admin-cancel{flex:1;padding:11px;border-radius:10px;border:1px solid #e5e3df;background:transparent;font-family:'Inter',sans-serif;font-size:14px;color:#999;cursor:pointer;}
 .btn-admin-enter{flex:1;padding:11px;border-radius:10px;border:none;background:#1a1a1a;color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;}
-
-/* admin panel inside sidebar */
 .admin-panel{display:none;padding:1.2rem;border-top:1px solid #f0ede8;}
 .admin-panel.show{display:block;}
 .admin-panel-title{font-size:12px;font-weight:500;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
-.btn-clear-all{
-  width:100%;padding:11px;border-radius:10px;border:none;
-  background:#fff0f0;color:#c0392b;font-family:'Inter',sans-serif;
-  font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;margin-bottom:8px;
-}
+.btn-clear-all{width:100%;padding:11px;border-radius:10px;border:none;background:#fff0f0;color:#c0392b;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;margin-bottom:8px;}
 .btn-clear-all:hover{background:#ffdada;}
-.btn-admin-logout{
-  width:100%;padding:9px;border-radius:10px;border:1px solid #e5e3df;
-  background:transparent;color:#aaa;font-family:'Inter',sans-serif;font-size:13px;cursor:pointer;
-}
+.btn-admin-logout{width:100%;padding:9px;border-radius:10px;border:1px solid #e5e3df;background:transparent;color:#aaa;font-family:'Inter',sans-serif;font-size:13px;cursor:pointer;}
 .btn-admin-logout:hover{background:#faf8f5;}
 
-@media(max-width:480px){
-  .hero-date{font-size:60px;}
-  .sidebar{width:calc(100% - 40px);}
-}
+@media(max-width:480px){.hero-date{font-size:60px;}.sidebar{width:calc(100% - 40px);}}
 </style>
 </head>
 <body>
@@ -230,13 +122,11 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
 <div class="bg"></div>
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<!-- Sidebar toggle -->
 <button class="sidebar-toggle" onclick="toggleSidebar()">
   <span class="badge hidden" id="badge">0</span>
   Confirmados
 </button>
 
-<!-- Sidebar -->
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-header-top">
@@ -261,7 +151,6 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
   </div>
 </div>
 
-<!-- Admin login modal -->
 <div class="admin-overlay" id="admin-overlay">
   <div class="admin-box">
     <div class="admin-title">Área Restrita</div>
@@ -276,7 +165,6 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
   </div>
 </div>
 
-<!-- Page -->
 <div class="page-wrap">
   <div class="hero-text">
     <div class="hero-date">25</div>
@@ -288,7 +176,6 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
   <button class="btn-confirm" onclick="openModal()">✓ Confirmar Presença</button>
 </div>
 
-<!-- RSVP Modal -->
 <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
   <div class="modal">
     <div class="modal-header">
@@ -297,7 +184,6 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
     </div>
     <div class="modal-scroll">
 
-      <!-- Form -->
       <div class="form-wrap" id="form-wrap">
         <div class="form-group">
           <label>Seu nome</label>
@@ -313,9 +199,7 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
         <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
       </div>
 
-      <!-- Success -->
       <div class="success-wrap" id="success-wrap">
-
         <div class="success-top">
           <div class="success-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -324,7 +208,6 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
           <div class="success-sub" id="success-name-msg"></div>
         </div>
 
-        <!-- Story art -->
         <div class="story-section">
           <div class="story-label">Seu story para o Instagram</div>
           <div class="story-frame">
@@ -341,7 +224,6 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
           </div>
         </div>
 
-        <!-- WhatsApp -->
         <div class="section-divider">
           <div class="section-tag">Grupo do evento</div>
           <a class="btn-whatsapp" href="https://chat.whatsapp.com/K2pDRLQ87Vl0hvmXc9byHK?mode=gi_t" target="_blank">
@@ -353,7 +235,7 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
         <button class="btn btn-ghost" onclick="closeModal()">Fechar</button>
       </div>
 
-    </div><!-- end modal-scroll -->
+    </div>
   </div>
 </div>
 
@@ -370,7 +252,6 @@ var storyImg = new Image();
 storyImg.crossOrigin = 'anonymous';
 storyImg.src = 'https://raw.githubusercontent.com/Prof-Diego-Prado/convitesalao/main/convite%20erika.jpeg';
 
-/* ── GUESTS ── */
 function saveGuests(){ localStorage.setItem('erika_guests_v3', JSON.stringify(guests)); }
 
 function renderGuests(){
@@ -386,180 +267,176 @@ function renderGuests(){
   badge.textContent = guests.length;
   badge.classList.remove('hidden');
   count.textContent = guests.length === 1 ? '1 confirmado(a)' : guests.length + ' confirmados';
-  list.innerHTML = guests.map(function(g, i){
+  list.innerHTML = guests.map(function(g,i){
     var initials = g.nome.trim().split(' ').filter(Boolean).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
     var delBtn = adminLogged ? '<button class="guest-del" title="Remover" onclick="removeGuest('+i+')">×</button>' : '';
-    return '<li class="guest-item">' +
-      '<div class="guest-avatar">'+initials+'</div>' +
-      '<div class="guest-info"><div class="guest-name">'+g.nome+'</div>' +
-      (g.insta ? '<div class="guest-insta">'+g.insta+'</div>' : '') + '</div>' +
-      '<span class="guest-num">#'+String(i+1).padStart(2,'0')+'</span>' +
-      delBtn + '</li>';
+    return '<li class="guest-item"><div class="guest-avatar">'+initials+'</div><div class="guest-info"><div class="guest-name">'+g.nome+'</div>'+(g.insta?'<div class="guest-insta">'+g.insta+'</div>':'')+'</div><span class="guest-num">#'+String(i+1).padStart(2,'0')+'</span>'+delBtn+'</li>';
   }).join('');
 }
 
 function removeGuest(i){
   if(!confirm('Remover "'+guests[i].nome+'" da lista?')) return;
-  guests.splice(i, 1);
-  saveGuests(); renderGuests();
+  guests.splice(i,1); saveGuests(); renderGuests();
 }
-
 function clearAll(){
-  if(!confirm('Limpar TODA a lista de confirmados? Essa ação não pode ser desfeita.')) return;
-  guests = [];
-  saveGuests(); renderGuests();
+  if(!confirm('Limpar TODA a lista? Essa ação não pode ser desfeita.')) return;
+  guests=[]; saveGuests(); renderGuests();
 }
 
-/* ── RSVP MODAL ── */
 function openModal(){
   document.getElementById('modal-overlay').classList.add('open');
   document.getElementById('form-wrap').classList.remove('hide');
   document.getElementById('success-wrap').classList.remove('show');
-  document.getElementById('nome').value = '';
-  document.getElementById('insta').value = '';
-  document.getElementById('err-nome').style.display = 'none';
-  document.getElementById('err-insta').style.display = 'none';
+  document.getElementById('nome').value='';
+  document.getElementById('insta').value='';
+  document.getElementById('err-nome').style.display='none';
+  document.getElementById('err-insta').style.display='none';
 }
 function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); }
-function handleOverlayClick(e){ if(e.target === document.getElementById('modal-overlay')) closeModal(); }
+function handleOverlayClick(e){ if(e.target===document.getElementById('modal-overlay')) closeModal(); }
 
 function confirmar(){
-  var nome = document.getElementById('nome').value.trim();
-  var insta = document.getElementById('insta').value.trim();
-  document.getElementById('err-nome').style.display = nome ? 'none' : 'block';
-  document.getElementById('err-insta').style.display = insta ? 'none' : 'block';
-  if(!nome || !insta) return;
-
-  currentName = nome;
-  currentInsta = insta.startsWith('@') ? insta : '@'+insta;
-
-  if(!guests.find(function(g){return g.nome === nome;})){
-    guests.push({nome: nome, insta: currentInsta});
-    saveGuests(); renderGuests();
+  var nome=document.getElementById('nome').value.trim();
+  var insta=document.getElementById('insta').value.trim();
+  document.getElementById('err-nome').style.display=nome?'none':'block';
+  document.getElementById('err-insta').style.display=insta?'none':'block';
+  if(!nome||!insta) return;
+  currentName=nome;
+  currentInsta=insta.startsWith('@')?insta:'@'+insta;
+  if(!guests.find(function(g){return g.nome===nome;})){
+    guests.push({nome:nome,insta:currentInsta}); saveGuests(); renderGuests();
   }
-
-  document.getElementById('success-name-msg').textContent = 'Te vemos lá, '+nome.split(' ')[0]+'! 🎉';
+  document.getElementById('success-name-msg').textContent='Te vemos lá, '+nome.split(' ')[0]+'! 🎉';
   document.getElementById('form-wrap').classList.add('hide');
   document.getElementById('success-wrap').classList.add('show');
-  // scroll to top of modal content
-  document.querySelector('.modal-scroll').scrollTop = 0;
+  document.querySelector('.modal-scroll').scrollTop=0;
   drawStory();
 }
 
 /* ── STORY CANVAS ── */
 function drawStory(){
-  var canvas = document.getElementById('story-canvas');
-  var W = 1080, H = 1920;
-  canvas.width = W; canvas.height = H;
-  var ctx = canvas.getContext('2d');
+  var canvas=document.getElementById('story-canvas');
+  var W=1080, H=1920;
+  canvas.width=W; canvas.height=H;
+  var ctx=canvas.getContext('2d');
 
   function render(){
     ctx.clearRect(0,0,W,H);
 
-    // Background image — cover fill, anchored to top
+    /* ─ IMAGEM DE FUNDO ─
+       A foto original é landscape (mais larga que alta).
+       Para o story 9:16 precisamos escalar para cobrir a altura inteira,
+       depois deslocar horizontalmente para mostrar a parte ESQUERDA da foto
+       (onde está a Érika) em vez de centralizar.
+       offsetX negativo = puxa para a esquerda → mais da pessoa aparece.
+    */
     if(storyImg.naturalWidth){
-      var s = Math.max(W/storyImg.naturalWidth, H/storyImg.naturalHeight);
-      var dw = storyImg.naturalWidth*s, dh = storyImg.naturalHeight*s;
-      var dx = (W-dw)/2, dy = 0; // anchor top
-      ctx.drawImage(storyImg, dx, dy, dw, dh);
+      var imgW = storyImg.naturalWidth;
+      var imgH = storyImg.naturalHeight;
+      // Escala pela altura: a foto preenche H pixels de altura
+      var scale = H / imgH;
+      var dw = imgW * scale;   // largura escalada (maior que W)
+      var dh = H;              // altura = canvas inteiro
+
+      // Centralizado ficaria em: dx = (W - dw) / 2  (valor negativo)
+      // Puxamos mais para a esquerda para enquadrar o rosto/cabelo
+      // shiftLeft = quanto a mais deslocar além do centro (em px do canvas)
+      var shiftLeft = 180;
+      var dx = (W - dw) / 2 - shiftLeft;
+
+      ctx.drawImage(storyImg, dx, 0, dw, dh);
     }
 
-    // Gradient overlay — heavier at bottom so text always readable
-    var g = ctx.createLinearGradient(0,0,0,H);
-    g.addColorStop(0,   'rgba(0,0,0,0.30)');
-    g.addColorStop(0.30,'rgba(0,0,0,0.08)');
-    g.addColorStop(0.52,'rgba(0,0,0,0.55)');
-    g.addColorStop(0.72,'rgba(0,0,0,0.75)');
-    g.addColorStop(1,   'rgba(0,0,0,0.92)');
-    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+    /* Gradiente — topo leve, base pesada para legibilidade dos textos */
+    var g=ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,   'rgba(0,0,0,0.15)');
+    g.addColorStop(0.28,'rgba(0,0,0,0.04)');
+    g.addColorStop(0.50,'rgba(0,0,0,0.50)');
+    g.addColorStop(0.68,'rgba(0,0,0,0.72)');
+    g.addColorStop(1,   'rgba(0,0,0,0.90)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
 
-    ctx.textAlign = 'center';
+    ctx.textAlign='center';
 
-    // ── ZONE 1: top badge (y 80–230) ──
-    // date pill background
-    var px=W/2-200, py=60, pw=400, ph=80;
-    ctx.fillStyle='rgba(255,255,255,0.12)';
-    rr(ctx,px,py,pw,ph,40); ctx.fill();
-    ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=1.5;
-    rr(ctx,px,py,pw,ph,40); ctx.stroke();
-    ctx.fillStyle='rgba(255,255,255,0.92)';
+    /* ── Z1: pílula de data (topo) ── */
+    var px=W/2-200, py=58, pw=400, ph=82;
+    ctx.fillStyle='rgba(255,255,255,0.13)';
+    rr(ctx,px,py,pw,ph,41); ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.28)'; ctx.lineWidth=1.5;
+    rr(ctx,px,py,pw,ph,41); ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,0.95)';
     ctx.font='500 34px Inter,sans-serif';
-    ctx.fillText('25 DE ABRIL', W/2, py+50);
+    ctx.fillText('25 DE ABRIL', W/2, py+52);
 
     ctx.fillStyle='rgba(255,255,255,0.55)';
     ctx.font='300 26px Inter,sans-serif';
-    ctx.fillText('Beauty & Celebration', W/2, 200);
+    ctx.fillText('Beauty & Celebration', W/2, 202);
 
-    // ── ZONE 2: big "Eu vou!" (y ~700–900) ──
+    /* ── Z2: "Eu vou!" grande ── */
     ctx.save();
-    ctx.font='700 190px "Dancing Script",cursive';
+    ctx.font='700 195px "Dancing Script",cursive';
     ctx.fillStyle='#fff';
-    ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=50;
-    ctx.fillText('Eu vou!', W/2, 870);
+    ctx.shadowColor='rgba(0,0,0,0.65)'; ctx.shadowBlur=55;
+    ctx.fillText('Eu vou!', W/2, 880);
     ctx.restore();
 
-    // ── ZONE 3: subtitle (y ~970) ──
-    ctx.fillStyle='rgba(255,255,255,0.75)';
+    /* ── Z3: subtítulo ── */
+    ctx.fillStyle='rgba(255,255,255,0.78)';
     ctx.font='300 34px Inter,sans-serif';
-    ctx.fillText('Já confirmei minha presença', W/2, 970);
+    ctx.fillText('Já confirmei minha presença', W/2, 978);
 
-    // ── ZONE 4: thin divider (y ~1020) ──
-    ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(W/2-160,1020); ctx.lineTo(W/2+160,1020); ctx.stroke();
+    /* ── Z4: divisor ── */
+    ctx.strokeStyle='rgba(255,255,255,0.22)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(W/2-150,1026); ctx.lineTo(W/2+150,1026); ctx.stroke();
 
-    // ── ZONE 5: name box (y 1060–1230) ──
-    var bx=W/2-310, by=1060, bw=620, bh=160;
+    /* ── Z5: caixa com nome e @instagram ── */
+    var bx=W/2-310, by=1058, bw=620, bh=162;
     ctx.fillStyle='rgba(255,255,255,0.10)';
     rr(ctx,bx,by,bw,bh,24); ctx.fill();
     ctx.strokeStyle='rgba(255,255,255,0.30)'; ctx.lineWidth=2;
     rr(ctx,bx,by,bw,bh,24); ctx.stroke();
 
-    // truncate long names
     ctx.font='500 48px Inter,sans-serif';
     ctx.fillStyle='#fff';
-    var nameText = currentName;
-    while(ctx.measureText(nameText).width > bw-60 && nameText.length > 4){
-      nameText = nameText.slice(0,-1);
-    }
-    if(nameText !== currentName) nameText += '…';
+    var nameText=currentName;
+    while(ctx.measureText(nameText).width>bw-60 && nameText.length>4) nameText=nameText.slice(0,-1);
+    if(nameText!==currentName) nameText+='…';
     ctx.fillText(nameText, W/2, by+68);
 
     ctx.font='300 34px Inter,sans-serif';
-    ctx.fillStyle='rgba(255,255,255,0.60)';
-    var instaText = currentInsta;
-    while(ctx.measureText(instaText).width > bw-60 && instaText.length > 4){
-      instaText = instaText.slice(0,-1);
-    }
-    if(instaText !== currentInsta) instaText += '…';
+    ctx.fillStyle='rgba(255,255,255,0.62)';
+    var instaText=currentInsta;
+    while(ctx.measureText(instaText).width>bw-60 && instaText.length>4) instaText=instaText.slice(0,-1);
+    if(instaText!==currentInsta) instaText+='…';
     ctx.fillText(instaText, W/2, by+122);
 
-    // ── ZONE 6: event info strip (y 1280–1450) ──
-    var ex=W/2-310, ey=1270, ew=620, eh=150;
-    ctx.fillStyle='rgba(0,0,0,0.30)';
+    /* ── Z6: faixa do evento ── */
+    var ex=W/2-310, ey=1272, ew=620, eh=152;
+    ctx.fillStyle='rgba(0,0,0,0.32)';
     rr(ctx,ex,ey,ew,eh,20); ctx.fill();
 
     ctx.fillStyle='rgba(255,255,255,0.45)';
     ctx.font='400 24px Inter,sans-serif';
     ctx.fillText('EVENTO', W/2, ey+38);
 
-    ctx.fillStyle='rgba(255,255,255,0.88)';
+    ctx.fillStyle='rgba(255,255,255,0.90)';
     ctx.font='500 36px Inter,sans-serif';
-    ctx.fillText('25 de Abril de 2025', W/2, ey+84);
+    ctx.fillText('25 de Abril de 2025', W/2, ey+86);
 
     ctx.fillStyle='rgba(255,255,255,0.55)';
     ctx.font='300 28px Inter,sans-serif';
-    ctx.fillText('Celebrando a vida em boa companhia', W/2, ey+128);
+    ctx.fillText('Celebrando a vida em boa companhia', W/2, ey+130);
 
-    // ── ZONE 7: footer script (y ~1820) ──
+    /* ── Z7: rodapé script ── */
     ctx.save();
-    ctx.font='600 72px "Dancing Script",cursive';
-    ctx.fillStyle='rgba(255,255,255,0.30)';
-    ctx.fillText('Beauty & Celebration', W/2, 1840);
+    ctx.font='600 70px "Dancing Script",cursive';
+    ctx.fillStyle='rgba(255,255,255,0.28)';
+    ctx.fillText('Beauty & Celebration', W/2, 1845);
     ctx.restore();
   }
 
   if(storyImg.complete && storyImg.naturalWidth){ render(); }
-  else { storyImg.onload = render; storyImg.onerror = render; }
+  else { storyImg.onload=render; storyImg.onerror=render; }
 }
 
 function rr(ctx,x,y,w,h,r){
@@ -571,31 +448,28 @@ function rr(ctx,x,y,w,h,r){
 }
 
 function downloadStory(){
-  var c = document.getElementById('story-canvas');
-  var a = document.createElement('a');
-  a.download = 'eu-vou-beauty-celebration.png';
-  a.href = c.toDataURL('image/png');
+  var c=document.getElementById('story-canvas');
+  var a=document.createElement('a');
+  a.download='eu-vou-beauty-celebration.png';
+  a.href=c.toDataURL('image/png');
   a.click();
 }
 
 function shareToInstagram(){
-  var c = document.getElementById('story-canvas');
+  var c=document.getElementById('story-canvas');
   c.toBlob(function(blob){
-    var file = new File([blob],'eu-vou-beauty-celebration.png',{type:'image/png'});
+    var file=new File([blob],'eu-vou-beauty-celebration.png',{type:'image/png'});
     if(navigator.canShare && navigator.canShare({files:[file]})){
-      navigator.share({files:[file], title:'Eu vou! Beauty & Celebration – 25 ABR'}).catch(function(){});
+      navigator.share({files:[file],title:'Eu vou! Beauty & Celebration – 25 ABR'}).catch(function(){});
     } else {
       downloadStory();
-      setTimeout(function(){
-        alert('Imagem salva! 📸\nAbra o Instagram → Stories e selecione a imagem da galeria.');
-      }, 500);
+      setTimeout(function(){ alert('Imagem salva! 📸\nAbra o Instagram → Stories e selecione a imagem da galeria.'); },500);
     }
   },'image/png');
 }
 
-/* ── SIDEBAR ── */
 function toggleSidebar(){
-  var s = document.getElementById('sidebar'), o = document.getElementById('overlay');
+  var s=document.getElementById('sidebar'), o=document.getElementById('overlay');
   if(s.classList.contains('open')){ closeSidebar(); }
   else { s.classList.add('open'); o.classList.add('visible'); }
 }
@@ -604,39 +478,32 @@ function closeSidebar(){
   document.getElementById('overlay').classList.remove('visible');
 }
 
-/* ── ADMIN ── */
 function openAdminLogin(){
   if(adminLogged){ toggleAdminPanel(); return; }
-  document.getElementById('admin-user').value = '';
-  document.getElementById('admin-pass').value = '';
-  document.getElementById('admin-err').style.display = 'none';
+  document.getElementById('admin-user').value='';
+  document.getElementById('admin-pass').value='';
+  document.getElementById('admin-err').style.display='none';
   document.getElementById('admin-overlay').classList.add('open');
 }
 function closeAdminLogin(){ document.getElementById('admin-overlay').classList.remove('open'); }
 
 function doAdminLogin(){
-  var u = document.getElementById('admin-user').value.trim();
-  var p = document.getElementById('admin-pass').value;
-  if(u === ADMIN_USER && p === ADMIN_PASS){
-    adminLogged = true;
+  var u=document.getElementById('admin-user').value.trim();
+  var p=document.getElementById('admin-pass').value;
+  if(u===ADMIN_USER && p===ADMIN_PASS){
+    adminLogged=true;
     closeAdminLogin();
     document.getElementById('admin-panel').classList.add('show');
-    renderGuests(); // re-render with delete buttons
+    renderGuests();
   } else {
-    document.getElementById('admin-err').style.display = 'block';
+    document.getElementById('admin-err').style.display='block';
   }
 }
+document.getElementById('admin-pass').addEventListener('keydown',function(e){ if(e.key==='Enter') doAdminLogin(); });
 
-document.getElementById('admin-pass').addEventListener('keydown', function(e){
-  if(e.key === 'Enter') doAdminLogin();
-});
-
-function toggleAdminPanel(){
-  document.getElementById('admin-panel').classList.toggle('show');
-}
-
+function toggleAdminPanel(){ document.getElementById('admin-panel').classList.toggle('show'); }
 function adminLogout(){
-  adminLogged = false;
+  adminLogged=false;
   document.getElementById('admin-panel').classList.remove('show');
   renderGuests();
 }
