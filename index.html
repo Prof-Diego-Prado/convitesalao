@@ -4,216 +4,283 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Beauty & Celebration – 25 ABR</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #faf8f5;
-      color: #2c2c2a;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 2rem 1rem;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    .card {
+    /* Background image */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background-image: url('https://raw.githubusercontent.com/Prof-Diego-Prado/convitesalao/main/convite%20erika.jpeg');
+      background-size: cover;
+      background-position: center top;
+      z-index: 0;
+    }
+    .bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 12, 10, 0.62);
+      backdrop-filter: blur(2px);
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    /* Hero text */
+    .hero-text {
+      text-align: center;
+      color: #fff;
+    }
+    .hero-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -3px;
+    }
+    .hero-line {
+      width: 60px; height: 1px;
+      background: rgba(255,255,255,0.45);
+      margin: 8px auto;
+    }
+    .hero-month {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      letter-spacing: 8px;
+      color: rgba(255,255,255,0.85);
+    }
+    .hero-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+    }
+    .hero-script {
+      font-family: 'Dancing Script', cursive;
+      font-size: 34px;
+      color: rgba(255,255,255,0.92);
+      margin-top: 1rem;
+    }
+
+    /* Confirm button */
+    .btn-confirm {
+      background: #fff;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 50px;
+      padding: 16px 48px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+    .btn-confirm:hover { background: #f0ede8; transform: translateY(-1px); }
+    .btn-confirm:active { transform: scale(0.97); }
+
+    /* Modal overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
       background: #fff;
       border-radius: 20px;
-      max-width: 480px;
       width: 100%;
+      max-width: 420px;
       overflow: hidden;
-      box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+      transform: translateY(20px);
+      transition: transform 0.25s;
     }
+    .modal-overlay.open .modal { transform: translateY(0); }
 
-    .hero {
-      background: linear-gradient(160deg, #1a1a1a 0%, #2d2d2d 100%);
-      padding: 2.5rem 2rem 2rem;
+    .modal-header {
+      background: #1a1a1a;
+      padding: 1.6rem 1.5rem 1.3rem;
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 180px; height: 180px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.06);
+    .modal-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 26px;
+      color: #fff;
     }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -60px; left: -30px;
-      width: 220px; height: 220px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.04);
+    .modal-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 3px;
+      letter-spacing: 0.3px;
     }
 
-    .date-block { display: inline-flex; flex-direction: column; align-items: center; margin-bottom: 1rem; }
-    .date-number { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 700; color: #fff; line-height: 1; letter-spacing: -2px; }
-    .date-divider { width: 60px; height: 1px; background: rgba(255,255,255,0.4); margin: 6px 0; }
-    .date-month { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 400; color: rgba(255,255,255,0.85); letter-spacing: 6px; }
-    .hero-sub { font-size: 13px; color: rgba(255,255,255,0.55); letter-spacing: 0.5px; margin-top: 4px; }
-    .hero-title { font-family: 'Dancing Script', cursive; font-size: 30px; color: rgba(255,255,255,0.9); margin-top: 1.2rem; }
+    .modal-body { padding: 1.5rem; }
 
-    .body { padding: 2rem; }
-
-    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: #888; margin-bottom: 1.5rem; text-align: center; }
-
-    .step { display: none; }
-    .step.active { display: block; }
-
-    .form-group { margin-bottom: 1.2rem; }
-
-    label { display: block; font-size: 13px; color: #666; margin-bottom: 6px; font-weight: 400; }
-
-    input[type="text"], input[type="tel"] {
-      width: 100%; padding: 12px 14px; border: 1px solid #e5e3df; border-radius: 10px;
-      font-size: 15px; font-family: 'Inter', sans-serif; background: #faf8f5; color: #2c2c2a;
-      transition: border-color 0.2s; outline: none;
+    .form-group { margin-bottom: 1.1rem; }
+    label { display: block; font-size: 13px; color: #888; margin-bottom: 5px; }
+    input[type="text"] {
+      width: 100%; padding: 12px 14px;
+      border: 1px solid #e5e3df; border-radius: 10px;
+      font-size: 15px; font-family: 'Inter', sans-serif;
+      background: #faf8f5; color: #1a1a1a; outline: none;
+      transition: border-color 0.2s;
     }
-    input:focus { border-color: #2c2c2a; background: #fff; }
-
-    .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
-    .radio-option { flex: 1; min-width: 120px; }
-    .radio-option input { display: none; }
-    .radio-option label {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px; border: 1px solid #e5e3df; border-radius: 10px; cursor: pointer;
-      font-size: 14px; font-weight: 400; color: #444; transition: all 0.2s; background: #faf8f5;
-    }
-    .radio-option input:checked + label { border-color: #2c2c2a; background: #2c2c2a; color: #fff; }
-
-    .btn { width: 100%; padding: 14px; border-radius: 10px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; transition: all 0.2s; margin-top: 0.5rem; }
-    .btn-primary { background: #2c2c2a; color: #fff; }
-    .btn-primary:hover { background: #1a1a18; }
-    .btn-primary:active { transform: scale(0.98); }
-    .btn-outline { background: transparent; color: #2c2c2a; border: 1px solid #e5e3df; margin-top: 10px; }
-    .btn-outline:hover { background: #faf8f5; }
-
+    input[type="text"]:focus { border-color: #1a1a1a; background: #fff; }
     .error-msg { font-size: 12px; color: #c0392b; margin-top: 4px; display: none; }
 
-    .confirm-box { background: #faf8f5; border-radius: 12px; padding: 1.2rem; margin-bottom: 1.2rem; border: 1px solid #e5e3df; }
-    .confirm-row { display: flex; justify-content: space-between; font-size: 14px; padding: 4px 0; }
-    .confirm-row span:first-child { color: #888; }
-    .confirm-row span:last-child { font-weight: 500; color: #2c2c2a; }
-
-    .success-view { text-align: center; padding: 1rem 0 0.5rem; }
-    .success-icon { width: 60px; height: 60px; border-radius: 50%; background: #2c2c2a; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
-    .success-icon svg { width: 28px; height: 28px; }
-    .success-title { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
-    .success-text { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 1.5rem; }
+    .btn { width: 100%; padding: 14px; border-radius: 10px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; transition: all 0.2s; }
+    .btn + .btn { margin-top: 10px; }
+    .btn-dark { background: #1a1a1a; color: #fff; }
+    .btn-dark:hover { background: #000; }
+    .btn-dark:active { transform: scale(0.98); }
+    .btn-ghost { background: transparent; color: #aaa; border: 1px solid #e5e3df; }
+    .btn-ghost:hover { background: #faf8f5; color: #666; }
 
     .btn-whatsapp {
-      background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center;
-      gap: 10px; border: none; border-radius: 10px; padding: 14px; width: 100%;
-      font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer;
-      text-decoration: none; transition: background 0.2s; margin-top: 0.5rem;
+      width: 100%; padding: 14px; border-radius: 10px; border: none;
+      background: #25D366; color: #fff;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500;
+      cursor: pointer; text-decoration: none; transition: background 0.2s; margin-top: 10px;
     }
     .btn-whatsapp:hover { background: #1ebe5d; }
 
-    .skip-link {
-      display: block; text-align: center; margin-top: 14px;
-      font-size: 13px; color: #bbb; cursor: pointer;
-      text-decoration: underline; text-underline-offset: 3px;
+    /* SUCCESS VIEW */
+    .success-wrap { display: none; }
+    .success-wrap.show { display: block; }
+    .form-wrap.hide { display: none; }
+
+    .success-top {
+      text-align: center;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid #f0ede8;
+      margin-bottom: 1.2rem;
     }
-    .skip-link:hover { color: #888; }
+    .success-icon {
+      width: 52px; height: 52px; border-radius: 50%; background: #1a1a1a;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;
+    }
+    .success-icon svg { width: 24px; height: 24px; }
+    .success-title { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 4px; }
+    .success-sub { font-size: 13px; color: #888; }
 
-    .declined-view { text-align: center; padding: 1rem 0 0.5rem; }
-    .declined-icon { font-size: 36px; margin-bottom: 1rem; }
-    .declined-title { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; }
-    .declined-text { font-size: 14px; color: #666; line-height: 1.6; }
+    /* STORY CANVAS */
+    .story-section { margin-bottom: 1.2rem; }
+    .story-label { font-size: 12px; color: #aaa; text-align: center; margin-bottom: 10px; letter-spacing: 0.5px; }
 
-    .progress { display: flex; gap: 6px; justify-content: center; margin-bottom: 1.5rem; }
-    .progress-dot { width: 6px; height: 6px; border-radius: 50%; background: #e5e3df; transition: background 0.3s; }
-    .progress-dot.active { background: #2c2c2a; }
+    .story-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9/16;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+    }
+    .story-frame canvas { display: block; width: 100%; height: 100%; }
 
-    /* SIDEBAR */
+    .story-actions {
+      display: flex; gap: 8px; margin-top: 10px;
+    }
+    .btn-story {
+      flex: 1; padding: 11px; border-radius: 10px; border: 1px solid #e5e3df;
+      background: #faf8f5; color: #444; font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn-story:hover { background: #f0ede8; border-color: #ccc; }
+
+    /* Sidebar toggle */
     .sidebar-toggle {
       position: fixed; right: 0; top: 50%; transform: translateY(-50%);
-      background: #2c2c2a; color: #fff; border: none;
-      border-radius: 12px 0 0 12px; padding: 16px 10px;
-      cursor: pointer; z-index: 1000;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      color: #fff; border: 1px solid rgba(255,255,255,0.2);
+      border-right: none; border-radius: 12px 0 0 12px;
+      padding: 16px 10px; cursor: pointer; z-index: 50;
       display: flex; flex-direction: column; align-items: center; gap: 8px;
       font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
-      letter-spacing: 0.5px; transition: background 0.2s;
-      writing-mode: vertical-rl; text-orientation: mixed;
+      writing-mode: vertical-rl; transition: background 0.2s;
     }
-    .sidebar-toggle:hover { background: #1a1a18; }
-
-    .badge {
-      background: #c0392b; color: #fff; border-radius: 20px;
-      padding: 2px 7px; font-size: 11px; font-weight: 600;
-      writing-mode: horizontal-tb; min-width: 20px; text-align: center;
-    }
+    .sidebar-toggle:hover { background: rgba(255,255,255,0.25); }
+    .badge { background: #c0392b; color: #fff; border-radius: 20px; padding: 2px 7px; font-size: 11px; font-weight: 600; writing-mode: horizontal-tb; min-width: 20px; text-align: center; }
     .badge.hidden { display: none; }
 
     .sidebar {
       position: fixed; right: -320px; top: 0; height: 100%; width: 300px;
-      background: #fff; box-shadow: -4px 0 30px rgba(0,0,0,0.12);
-      z-index: 999; transition: right 0.3s ease;
-      display: flex; flex-direction: column; overflow: hidden;
+      background: #fff; box-shadow: -4px 0 30px rgba(0,0,0,0.2);
+      z-index: 200; transition: right 0.3s ease;
+      display: flex; flex-direction: column;
     }
     .sidebar.open { right: 0; }
-
-    .sidebar-header { background: #2c2c2a; padding: 1.5rem 1.2rem 1.2rem; flex-shrink: 0; }
+    .sidebar-header { background: #1a1a1a; padding: 1.5rem 1.2rem 1.2rem; }
     .sidebar-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
     .sidebar-title { font-family: 'Playfair Display', serif; font-size: 16px; color: #fff; }
-    .sidebar-close { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 22px; line-height: 1; padding: 0; }
+    .sidebar-close { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 22px; line-height: 1; }
     .sidebar-close:hover { color: #fff; }
     .sidebar-count { font-size: 12px; color: rgba(255,255,255,0.5); }
-
     .sidebar-body { flex: 1; overflow-y: auto; }
-
     .guest-list { list-style: none; }
-    .guest-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 12px 1.2rem; border-bottom: 1px solid #f0ede8;
-      animation: fadeIn 0.3s ease;
-    }
+    .guest-item { display: flex; align-items: center; gap: 10px; padding: 12px 1.2rem; border-bottom: 1px solid #f5f3f0; animation: fadeIn 0.3s ease; }
     .guest-item:last-child { border-bottom: none; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateX(10px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    .guest-avatar {
-      width: 34px; height: 34px; border-radius: 50%; background: #f0ede8;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 500; color: #2c2c2a; flex-shrink: 0;
-    }
-    .guest-name { font-size: 14px; color: #2c2c2a; }
-    .guest-num { font-size: 11px; color: #ccc; margin-left: auto; flex-shrink: 0; }
-
+    @keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+    .guest-avatar { width: 34px; height: 34px; border-radius: 50%; background: #f0ede8; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; color: #1a1a1a; flex-shrink: 0; }
+    .guest-info { flex: 1; overflow: hidden; }
+    .guest-name { font-size: 14px; color: #1a1a1a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .guest-insta { font-size: 11px; color: #aaa; }
+    .guest-num { font-size: 11px; color: #ccc; flex-shrink: 0; }
     .empty-list { text-align: center; padding: 3rem 1.5rem; color: #bbb; font-size: 13px; line-height: 1.6; }
 
-    .overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.3);
-      z-index: 998; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 49; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
     .overlay.visible { opacity: 1; pointer-events: all; }
 
     @media (max-width: 480px) {
-      .date-number { font-size: 56px; }
-      .hero { padding: 2rem 1.5rem 1.5rem; }
-      .body { padding: 1.5rem; }
+      .hero-date { font-size: 60px; }
       .sidebar { width: 280px; }
     }
   </style>
 </head>
 <body>
 
+<div class="bg"></div>
+
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
+<!-- Sidebar toggle -->
 <button class="sidebar-toggle" onclick="toggleSidebar()">
   <span class="badge hidden" id="badge">0</span>
   Confirmados
 </button>
 
+<!-- Sidebar -->
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-header-top">
@@ -229,219 +296,282 @@
   </div>
 </div>
 
-<div class="card">
-  <div class="hero">
-    <div class="date-block">
-      <div class="date-number">25</div>
-      <div class="date-divider"></div>
-      <div class="date-month">ABR</div>
-    </div>
+<!-- Page content -->
+<div class="page-wrap">
+  <div class="hero-text">
+    <div class="hero-date">25</div>
+    <div class="hero-line"></div>
+    <div class="hero-month">ABR</div>
     <div class="hero-sub">Celebrando a vida em boa companhia</div>
-    <div class="hero-title">Beauty &amp; Celebration</div>
+    <div class="hero-script">Beauty &amp; Celebration</div>
   </div>
 
-  <div class="body">
+  <button class="btn-confirm" onclick="openModal()">✓ Confirmar Presença</button>
+</div>
 
-    <div class="step active" id="step1">
-      <div class="progress">
-        <div class="progress-dot active"></div>
-        <div class="progress-dot"></div>
-        <div class="progress-dot"></div>
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-title">Beauty &amp; Celebration</div>
+      <div class="modal-sub">25 de Abril • Confirme sua presença</div>
+    </div>
+    <div class="modal-body">
+
+      <!-- Form -->
+      <div class="form-wrap" id="form-wrap">
+        <div class="form-group">
+          <label>Seu nome</label>
+          <input type="text" id="nome" placeholder="Como você quer ser chamado(a)?" />
+          <p class="error-msg" id="err-nome">Por favor, informe seu nome.</p>
+        </div>
+        <div class="form-group">
+          <label>Perfil do Instagram</label>
+          <input type="text" id="insta" placeholder="@seuperfil" />
+          <p class="error-msg" id="err-insta">Por favor, informe seu Instagram.</p>
+        </div>
+        <button class="btn btn-dark" onclick="confirmar()">Confirmar presença ✓</button>
+        <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
       </div>
-      <p class="section-label">Confirmação de Presença</p>
-      <div class="form-group">
-        <label>Seu nome completo</label>
-        <input type="text" id="nome" placeholder="Como você quer ser chamado(a)?" />
-        <p class="error-msg" id="err-nome">Por favor, informe seu nome.</p>
-      </div>
-      <div class="form-group">
-        <label>Você vai comparecer?</label>
-        <div class="radio-group">
-          <div class="radio-option">
-            <input type="radio" name="presenca" id="sim" value="sim" />
-            <label for="sim">🎉 Sim, vou!</label>
+
+      <!-- Success -->
+      <div class="success-wrap" id="success-wrap">
+        <div class="success-top">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
           </div>
-          <div class="radio-option">
-            <input type="radio" name="presenca" id="nao" value="nao" />
-            <label for="nao">😢 Não posso</label>
+          <div class="success-title">Presença confirmada!</div>
+          <div class="success-sub" id="success-name-msg"></div>
+        </div>
+
+        <div class="story-section">
+          <div class="story-label">SEU STORY PARA O INSTAGRAM</div>
+          <div class="story-frame">
+            <canvas id="story-canvas"></canvas>
+          </div>
+          <div class="story-actions">
+            <button class="btn-story" onclick="downloadStory()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Salvar story
+            </button>
           </div>
         </div>
-        <p class="error-msg" id="err-presenca">Por favor, selecione uma opção.</p>
-      </div>
-      <button class="btn btn-primary" onclick="step1Next()">Continuar →</button>
-    </div>
 
-    <div class="step" id="step2">
-      <div class="progress">
-        <div class="progress-dot active"></div>
-        <div class="progress-dot active"></div>
-        <div class="progress-dot"></div>
-      </div>
-      <p class="section-label">Seus dados</p>
-      <div class="form-group">
-        <label>WhatsApp</label>
-        <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" />
-        <p class="error-msg" id="err-whatsapp">Por favor, informe seu WhatsApp.</p>
-      </div>
-      <div class="form-group">
-        <label>Mensagem para a aniversariante <span style="color:#bbb;font-weight:300;">(opcional)</span></label>
-        <input type="text" id="mensagem" placeholder="Um desejo especial..." />
-      </div>
-      <button class="btn btn-primary" onclick="step2Next()">Continuar →</button>
-      <button class="btn btn-outline" onclick="goStep(1)">← Voltar</button>
-    </div>
-
-    <div class="step" id="step3">
-      <div class="progress">
-        <div class="progress-dot active"></div>
-        <div class="progress-dot active"></div>
-        <div class="progress-dot active"></div>
-      </div>
-      <p class="section-label">Confirmar dados</p>
-      <div class="confirm-box" id="resumo"></div>
-      <button class="btn btn-primary" onclick="finalizar()">Confirmar presença ✓</button>
-      <button class="btn btn-outline" onclick="goStep(2)">← Voltar</button>
-    </div>
-
-    <div class="step" id="step-success">
-      <div class="success-view">
-        <div class="success-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-        </div>
-        <div class="success-title">Presença confirmada!</div>
-        <p class="success-text">Que bom que você vai estar lá! 🎉<br>Você pode entrar no grupo do WhatsApp para não perder nenhuma novidade sobre a festa.</p>
         <a class="btn-whatsapp" href="https://chat.whatsapp.com/K2pDRLQ87Vl0hvmXc9byHK?mode=gi_t" target="_blank">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.126 1.533 5.869L0 24l6.266-1.509A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.001-1.368l-.358-.213-3.724.897.936-3.617-.235-.372A9.817 9.817 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.126 1.533 5.869L0 24l6.266-1.509A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.001-1.368l-.358-.213-3.724.897.936-3.617-.235-.372A9.817 9.817 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
           Entrar no grupo do WhatsApp
         </a>
-        <span class="skip-link" onclick="voltarInicio()">Agora não, obrigado(a)</span>
+        <button class="btn btn-ghost" style="margin-top:10px;" onclick="closeModal()">Fechar</button>
       </div>
-    </div>
 
-    <div class="step" id="step-declined">
-      <div class="declined-view">
-        <div class="declined-icon">🌸</div>
-        <div class="declined-title">Sentiremos sua falta!</div>
-        <p class="declined-text">Obrigada por avisar. Espero que possamos nos ver em breve. Com carinho da Érika 💛</p>
-      </div>
     </div>
-
   </div>
 </div>
 
 <script>
-  let dados = {};
-  let guests = JSON.parse(localStorage.getItem('erika_guests') || '[]');
+  var guests = JSON.parse(localStorage.getItem('erika_guests_v2') || '[]');
+  var currentName = '';
+  var currentInsta = '';
+  var storyImg = new Image();
+  storyImg.crossOrigin = 'anonymous';
+  storyImg.src = 'https://raw.githubusercontent.com/Prof-Diego-Prado/convitesalao/main/convite%20erika.jpeg';
 
-  function saveGuests() {
-    localStorage.setItem('erika_guests', JSON.stringify(guests));
-  }
+  function saveGuests() { localStorage.setItem('erika_guests_v2', JSON.stringify(guests)); }
 
   function renderGuests() {
-    const list = document.getElementById('guest-list');
-    const count = document.getElementById('sidebar-count');
-    const badge = document.getElementById('badge');
-
+    var list = document.getElementById('guest-list');
+    var count = document.getElementById('sidebar-count');
+    var badge = document.getElementById('badge');
     if (guests.length === 0) {
       list.innerHTML = '<li class="empty-list">Seja o primeiro a confirmar! 🎉</li>';
       count.textContent = 'Nenhuma confirmação ainda';
       badge.classList.add('hidden');
       return;
     }
-
     badge.textContent = guests.length;
     badge.classList.remove('hidden');
     count.textContent = guests.length === 1 ? '1 confirmado(a)' : guests.length + ' confirmados';
-
     list.innerHTML = guests.map(function(g, i) {
-      var parts = g.trim().split(' ').filter(Boolean);
-      var initials = parts.slice(0, 2).map(function(w){ return w[0]; }).join('').toUpperCase();
+      var initials = g.nome.trim().split(' ').filter(Boolean).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
       return '<li class="guest-item">' +
         '<div class="guest-avatar">' + initials + '</div>' +
-        '<span class="guest-name">' + g + '</span>' +
-        '<span class="guest-num">#' + String(i + 1).padStart(2, '0') + '</span>' +
-        '</li>';
+        '<div class="guest-info"><div class="guest-name">' + g.nome + '</div>' +
+        (g.insta ? '<div class="guest-insta">' + g.insta + '</div>' : '') + '</div>' +
+        '<span class="guest-num">#' + String(i+1).padStart(2,'0') + '</span></li>';
     }).join('');
+  }
+
+  function openModal() {
+    document.getElementById('modal-overlay').classList.add('open');
+    document.getElementById('form-wrap').classList.remove('hide');
+    document.getElementById('success-wrap').classList.remove('show');
+    document.getElementById('nome').value = '';
+    document.getElementById('insta').value = '';
+    document.getElementById('err-nome').style.display = 'none';
+    document.getElementById('err-insta').style.display = 'none';
+  }
+
+  function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+
+  function handleOverlayClick(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
+
+  function confirmar() {
+    var nome = document.getElementById('nome').value.trim();
+    var insta = document.getElementById('insta').value.trim();
+    document.getElementById('err-nome').style.display = nome ? 'none' : 'block';
+    document.getElementById('err-insta').style.display = insta ? 'none' : 'block';
+    if (!nome || !insta) return;
+
+    currentName = nome;
+    currentInsta = insta.startsWith('@') ? insta : '@' + insta;
+
+    if (!guests.find(function(g){return g.nome === nome;})) {
+      guests.push({ nome: nome, insta: currentInsta });
+      saveGuests();
+      renderGuests();
+    }
+
+    document.getElementById('success-name-msg').textContent = 'Te vemos lá, ' + nome.split(' ')[0] + '! 🎉';
+    document.getElementById('form-wrap').classList.add('hide');
+    document.getElementById('success-wrap').classList.add('show');
+    drawStory();
+  }
+
+  function drawStory() {
+    var canvas = document.getElementById('story-canvas');
+    var W = 1080, H = 1920;
+    canvas.width = W;
+    canvas.height = H;
+    var ctx = canvas.getContext('2d');
+
+    function render() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Background image
+      var imgW = storyImg.naturalWidth || W;
+      var imgH = storyImg.naturalHeight || H;
+      var scale = Math.max(W / imgW, H / imgH);
+      var dw = imgW * scale, dh = imgH * scale;
+      var dx = (W - dw) / 2, dy = (H - dh) / 2;
+      ctx.drawImage(storyImg, dx, dy, dw, dh);
+
+      // Dark overlay gradient
+      var grad = ctx.createLinearGradient(0, 0, 0, H);
+      grad.addColorStop(0, 'rgba(0,0,0,0.25)');
+      grad.addColorStop(0.4, 'rgba(0,0,0,0.1)');
+      grad.addColorStop(0.7, 'rgba(0,0,0,0.5)');
+      grad.addColorStop(1, 'rgba(0,0,0,0.82)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Top area: date
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.font = '500 36px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('25 DE ABRIL', W/2, 120);
+
+      // Thin line
+      ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(W/2 - 80, 145); ctx.lineTo(W/2 + 80, 145); ctx.stroke();
+
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.font = '300 28px Inter, sans-serif';
+      ctx.fillText('Beauty & Celebration', W/2, 195);
+
+      // Big "EU VOU!" text
+      ctx.save();
+      ctx.textAlign = 'center';
+      // Script large
+      ctx.font = 'bold 200px "Dancing Script", cursive';
+      ctx.fillStyle = '#fff';
+      ctx.shadowColor = 'rgba(0,0,0,0.4)';
+      ctx.shadowBlur = 30;
+      ctx.fillText('Eu vou!', W/2, H * 0.62);
+      ctx.restore();
+
+      // Subtitle
+      ctx.fillStyle = 'rgba(255,255,255,0.75)';
+      ctx.font = '300 38px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Já confirmei minha presença', W/2, H * 0.72);
+
+      // Name tag box
+      var bx = W/2 - 280, by = H * 0.78, bw = 560, bh = 130;
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
+      roundRect(ctx, bx, by, bw, bh, 20);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.lineWidth = 2;
+      roundRect(ctx, bx, by, bw, bh, 20);
+      ctx.stroke();
+
+      ctx.fillStyle = '#fff';
+      ctx.font = '500 44px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(currentName, W/2, by + 58);
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.font = '300 34px Inter, sans-serif';
+      ctx.fillText(currentInsta, W/2, by + 106);
+
+      // Bottom tag
+      ctx.fillStyle = 'rgba(255,255,255,0.45)';
+      ctx.font = '300 28px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Celebrando a vida em boa companhia', W/2, H - 70);
+    }
+
+    if (storyImg.complete && storyImg.naturalWidth) {
+      render();
+    } else {
+      storyImg.onload = render;
+      storyImg.onerror = function() {
+        // Render without image
+        var ctx2 = canvas.getContext('2d');
+        var g2 = ctx2.createLinearGradient(0, 0, 0, H);
+        g2.addColorStop(0, '#1a1a1a'); g2.addColorStop(1, '#2d2020');
+        ctx2.fillStyle = g2; ctx2.fillRect(0, 0, W, H);
+        render();
+      };
+    }
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  function downloadStory() {
+    var canvas = document.getElementById('story-canvas');
+    var link = document.createElement('a');
+    link.download = 'eu-vou-beauty-celebration.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
   }
 
   function toggleSidebar() {
     var s = document.getElementById('sidebar');
     var o = document.getElementById('overlay');
-    if (s.classList.contains('open')) {
-      closeSidebar();
-    } else {
-      s.classList.add('open');
-      o.classList.add('visible');
-    }
+    if (s.classList.contains('open')) { closeSidebar(); }
+    else { s.classList.add('open'); o.classList.add('visible'); }
   }
-
   function closeSidebar() {
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('overlay').classList.remove('visible');
   }
 
-  function goStep(n) {
-    document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
-    var target = n === 'success' ? 'step-success' : n === 'declined' ? 'step-declined' : 'step' + n;
-    document.getElementById(target).classList.add('active');
-  }
-
-  function step1Next() {
-    var nome = document.getElementById('nome').value.trim();
-    var presenca = document.querySelector('input[name="presenca"]:checked');
-    document.getElementById('err-nome').style.display = nome ? 'none' : 'block';
-    document.getElementById('err-presenca').style.display = presenca ? 'none' : 'block';
-    if (!nome || !presenca) return;
-    dados.nome = nome;
-    dados.presenca = presenca.value;
-    if (presenca.value === 'nao') { goStep('declined'); } else { goStep(2); }
-  }
-
-  function step2Next() {
-    var whatsapp = document.getElementById('whatsapp').value.trim();
-    document.getElementById('err-whatsapp').style.display = whatsapp ? 'none' : 'block';
-    if (!whatsapp) return;
-    dados.whatsapp = whatsapp;
-    dados.mensagem = document.getElementById('mensagem').value.trim();
-    var resumo = document.getElementById('resumo');
-    resumo.innerHTML =
-      '<div class="confirm-row"><span>Nome</span><span>' + dados.nome + '</span></div>' +
-      '<div class="confirm-row"><span>WhatsApp</span><span>' + dados.whatsapp + '</span></div>' +
-      (dados.mensagem ? '<div class="confirm-row"><span>Mensagem</span><span style="max-width:200px;text-align:right;">' + dados.mensagem + '</span></div>' : '') +
-      '<div class="confirm-row"><span>Evento</span><span>25 de Abril</span></div>';
-    goStep(3);
-  }
-
-  function finalizar() {
-    if (!guests.includes(dados.nome)) {
-      guests.push(dados.nome);
-      saveGuests();
-      renderGuests();
-    }
-    goStep('success');
-  }
-
-  function voltarInicio() {
-    document.getElementById('nome').value = '';
-    document.querySelectorAll('input[name="presenca"]').forEach(function(r){ r.checked = false; });
-    document.getElementById('whatsapp').value = '';
-    document.getElementById('mensagem').value = '';
-    dados = {};
-    goStep(1);
-  }
-
-  document.getElementById('whatsapp').addEventListener('input', function () {
-    var v = this.value.replace(/\D/g, '');
-    if (v.length > 11) v = v.slice(0, 11);
-    if (v.length >= 7) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
-    else if (v.length >= 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
-    this.value = v;
-  });
-
   renderGuests();
 </script>
-
 </body>
 </html>
