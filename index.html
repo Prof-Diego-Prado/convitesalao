@@ -352,17 +352,24 @@
             <canvas id="story-canvas"></canvas>
           </div>
           <div class="story-actions">
+            <button class="btn-story" onclick="shareToInstagram()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+              Compartilhar no story
+            </button>
             <button class="btn-story" onclick="downloadStory()">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Salvar story
+              Salvar imagem
             </button>
           </div>
         </div>
 
-        <a class="btn-whatsapp" href="https://chat.whatsapp.com/K2pDRLQ87Vl0hvmXc9byHK?mode=gi_t" target="_blank">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.126 1.533 5.869L0 24l6.266-1.509A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.001-1.368l-.358-.213-3.724.897.936-3.617-.235-.372A9.817 9.817 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
-          Entrar no grupo do WhatsApp
-        </a>
+        <div style="border-top:1px solid #f0ede8;padding-top:1.2rem;margin-top:0.4rem;">
+          <p style="font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#bbb;text-align:center;margin-bottom:12px;">GRUPO DO EVENTO</p>
+          <a class="btn-whatsapp" href="https://chat.whatsapp.com/K2pDRLQ87Vl0hvmXc9byHK?mode=gi_t" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.126 1.533 5.869L0 24l6.266-1.509A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.001-1.368l-.358-.213-3.724.897.936-3.617-.235-.372A9.817 9.817 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+            Entrar no grupo do WhatsApp
+          </a>
+        </div>
         <button class="btn btn-ghost" style="margin-top:10px;" onclick="closeModal()">Fechar</button>
       </div>
 
@@ -550,6 +557,24 @@
     ctx.lineTo(x, y + r);
     ctx.quadraticCurveTo(x, y, x + r, y);
     ctx.closePath();
+  }
+
+  function shareToInstagram() {
+    var canvas = document.getElementById('story-canvas');
+    canvas.toBlob(function(blob) {
+      var file = new File([blob], 'eu-vou-beauty-celebration.png', { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: 'Eu vou! Beauty & Celebration – 25 ABR' }).catch(function(){});
+      } else {
+        var link = document.createElement('a');
+        link.download = 'eu-vou-beauty-celebration.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        setTimeout(function(){
+          alert('Imagem salva! 📸\nAbra o Instagram > Stories e selecione a imagem da galeria para postar.');
+        }, 600);
+      }
+    }, 'image/png');
   }
 
   function downloadStory() {
