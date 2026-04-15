@@ -1,277 +1,233 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Beauty & Celebration – 25 ABR</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Beauty & Celebration – 25 ABR</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
-      position: relative;
-      overflow-x: hidden;
-    }
+body{
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem 1rem;
+  position:relative;overflow-x:hidden;
+}
 
-    /* Background image */
-    .bg {
-      position: fixed;
-      inset: 0;
-      background-image: url('https://raw.githubusercontent.com/Prof-Diego-Prado/convitesalao/main/convite%20erika.jpeg');
-      background-size: cover;
-      background-position: center top;
-      z-index: 0;
-    }
-    .bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(15, 12, 10, 0.62);
-      backdrop-filter: blur(2px);
-    }
+.bg{
+  position:fixed;inset:0;
+  background-image:url('https://raw.githubusercontent.com/Prof-Diego-Prado/convitesalao/main/convite%20erika.jpeg');
+  background-size:cover;background-position:center top;z-index:0;
+}
+.bg::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(10,8,6,0.60);
+  backdrop-filter:blur(2px);
+}
 
-    .page-wrap {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
+.page-wrap{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;gap:2rem;}
 
-    /* Hero text */
-    .hero-text {
-      text-align: center;
-      color: #fff;
-    }
-    .hero-date {
-      font-family: 'Playfair Display', serif;
-      font-size: 80px;
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: -3px;
-    }
-    .hero-line {
-      width: 60px; height: 1px;
-      background: rgba(255,255,255,0.45);
-      margin: 8px auto;
-    }
-    .hero-month {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      letter-spacing: 8px;
-      color: rgba(255,255,255,0.85);
-    }
-    .hero-sub {
-      font-size: 13px;
-      color: rgba(255,255,255,0.5);
-      letter-spacing: 0.5px;
-      margin-top: 6px;
-    }
-    .hero-script {
-      font-family: 'Dancing Script', cursive;
-      font-size: 34px;
-      color: rgba(255,255,255,0.92);
-      margin-top: 1rem;
-    }
+.hero-text{text-align:center;color:#fff;}
+.hero-date{font-family:'Playfair Display',serif;font-size:80px;font-weight:700;line-height:1;letter-spacing:-3px;}
+.hero-line{width:60px;height:1px;background:rgba(255,255,255,0.4);margin:8px auto;}
+.hero-month{font-family:'Playfair Display',serif;font-size:28px;letter-spacing:8px;color:rgba(255,255,255,0.85);}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px;}
+.hero-script{font-family:'Dancing Script',cursive;font-size:34px;color:rgba(255,255,255,0.92);margin-top:1rem;}
 
-    /* Confirm button */
-    .btn-confirm {
-      background: #fff;
-      color: #1a1a1a;
-      border: none;
-      border-radius: 50px;
-      padding: 16px 48px;
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      letter-spacing: 0.5px;
-      transition: all 0.2s;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-    }
-    .btn-confirm:hover { background: #f0ede8; transform: translateY(-1px); }
-    .btn-confirm:active { transform: scale(0.97); }
+.btn-confirm{
+  background:#fff;color:#1a1a1a;border:none;border-radius:50px;
+  padding:16px 48px;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;
+  cursor:pointer;letter-spacing:0.5px;transition:all .2s;
+  box-shadow:0 4px 24px rgba(0,0,0,0.35);
+}
+.btn-confirm:hover{background:#f0ede8;transform:translateY(-1px);}
 
-    /* Modal overlay */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s;
-    }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
+/* ── MODAL ── */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);
+  z-index:100;display:flex;align-items:center;justify-content:center;
+  padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all;}
 
-    .modal {
-      background: #fff;
-      border-radius: 20px;
-      width: 100%;
-      max-width: 420px;
-      overflow: hidden;
-      transform: translateY(20px);
-      transition: transform 0.25s;
-    }
-    .modal-overlay.open .modal { transform: translateY(0); }
+.modal{
+  background:#fff;border-radius:20px;width:100%;max-width:420px;
+  display:flex;flex-direction:column;
+  max-height:calc(100dvh - 2rem);
+  transform:translateY(20px);transition:transform .25s;
+  overflow:hidden;
+}
+.modal-overlay.open .modal{transform:translateY(0);}
 
-    .modal-header {
-      background: #1a1a1a;
-      padding: 1.6rem 1.5rem 1.3rem;
-      text-align: center;
-    }
-    .modal-title {
-      font-family: 'Dancing Script', cursive;
-      font-size: 26px;
-      color: #fff;
-    }
-    .modal-sub {
-      font-size: 12px;
-      color: rgba(255,255,255,0.5);
-      margin-top: 3px;
-      letter-spacing: 0.3px;
-    }
+.modal-header{background:#1a1a1a;padding:1.4rem 1.5rem 1.2rem;text-align:center;flex-shrink:0;}
+.modal-title{font-family:'Dancing Script',cursive;font-size:26px;color:#fff;}
+.modal-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-top:3px;}
 
-    .modal-body { padding: 1.5rem; }
+.modal-scroll{overflow-y:auto;flex:1;padding:1.4rem;}
 
-    .form-group { margin-bottom: 1.1rem; }
-    label { display: block; font-size: 13px; color: #888; margin-bottom: 5px; }
-    input[type="text"] {
-      width: 100%; padding: 12px 14px;
-      border: 1px solid #e5e3df; border-radius: 10px;
-      font-size: 15px; font-family: 'Inter', sans-serif;
-      background: #faf8f5; color: #1a1a1a; outline: none;
-      transition: border-color 0.2s;
-    }
-    input[type="text"]:focus { border-color: #1a1a1a; background: #fff; }
-    .error-msg { font-size: 12px; color: #c0392b; margin-top: 4px; display: none; }
+/* form */
+.form-group{margin-bottom:1.1rem;}
+label{display:block;font-size:13px;color:#888;margin-bottom:5px;}
+input[type="text"]{
+  width:100%;padding:12px 14px;border:1px solid #e5e3df;border-radius:10px;
+  font-size:15px;font-family:'Inter',sans-serif;background:#faf8f5;color:#1a1a1a;
+  outline:none;transition:border-color .2s;
+}
+input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
+.error-msg{font-size:12px;color:#c0392b;margin-top:4px;display:none;}
 
-    .btn { width: 100%; padding: 14px; border-radius: 10px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500; transition: all 0.2s; }
-    .btn + .btn { margin-top: 10px; }
-    .btn-dark { background: #1a1a1a; color: #fff; }
-    .btn-dark:hover { background: #000; }
-    .btn-dark:active { transform: scale(0.98); }
-    .btn-ghost { background: transparent; color: #aaa; border: 1px solid #e5e3df; }
-    .btn-ghost:hover { background: #faf8f5; color: #666; }
+.btn{width:100%;padding:14px;border-radius:10px;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;font-size:15px;font-weight:500;transition:all .2s;display:block;}
+.btn+.btn{margin-top:10px;}
+.btn-dark{background:#1a1a1a;color:#fff;}
+.btn-dark:hover{background:#000;}
+.btn-dark:active{transform:scale(0.98);}
+.btn-ghost{background:transparent;color:#999;border:1px solid #e5e3df;}
+.btn-ghost:hover{background:#faf8f5;color:#666;}
 
-    .btn-whatsapp {
-      width: 100%; padding: 14px; border-radius: 10px; border: none;
-      background: #25D366; color: #fff;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500;
-      cursor: pointer; text-decoration: none; transition: background 0.2s; margin-top: 10px;
-    }
-    .btn-whatsapp:hover { background: #1ebe5d; }
+/* success */
+.success-wrap{display:none;}
+.success-wrap.show{display:block;}
+.form-wrap.hide{display:none;}
 
-    /* SUCCESS VIEW */
-    .success-wrap { display: none; }
-    .success-wrap.show { display: block; }
-    .form-wrap.hide { display: none; }
+.success-top{text-align:center;padding-bottom:1.2rem;border-bottom:1px solid #f0ede8;margin-bottom:1.2rem;}
+.success-icon{width:52px;height:52px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+.success-icon svg{width:24px;height:24px;}
+.success-title{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px;}
+.success-sub{font-size:13px;color:#888;}
 
-    .success-top {
-      text-align: center;
-      padding-bottom: 1.2rem;
-      border-bottom: 1px solid #f0ede8;
-      margin-bottom: 1.2rem;
-    }
-    .success-icon {
-      width: 52px; height: 52px; border-radius: 50%; background: #1a1a1a;
-      display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;
-    }
-    .success-icon svg { width: 24px; height: 24px; }
-    .success-title { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 4px; }
-    .success-sub { font-size: 13px; color: #888; }
+.story-section{margin-bottom:1.2rem;}
+.story-label{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#bbb;text-align:center;margin-bottom:10px;}
+.story-frame{position:relative;width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#111;}
+.story-frame canvas{display:block;width:100%;height:100%;}
 
-    /* STORY CANVAS */
-    .story-section { margin-bottom: 1.2rem; }
-    .story-label { font-size: 12px; color: #aaa; text-align: center; margin-bottom: 10px; letter-spacing: 0.5px; }
+.story-actions{display:flex;gap:8px;margin-top:10px;}
+.btn-story{
+  flex:1;padding:11px;border-radius:10px;border:1px solid #e5e3df;
+  background:#faf8f5;color:#444;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.btn-story:hover{background:#f0ede8;border-color:#ccc;}
 
-    .story-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 9/16;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #111;
-    }
-    .story-frame canvas { display: block; width: 100%; height: 100%; }
+.section-divider{border-top:1px solid #f0ede8;padding-top:1.2rem;margin-top:0.4rem;margin-bottom:1rem;}
+.section-tag{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#bbb;text-align:center;margin-bottom:12px;}
 
-    .story-actions {
-      display: flex; gap: 8px; margin-top: 10px;
-    }
-    .btn-story {
-      flex: 1; padding: 11px; border-radius: 10px; border: 1px solid #e5e3df;
-      background: #faf8f5; color: #444; font-family: 'Inter', sans-serif;
-      font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-    }
-    .btn-story:hover { background: #f0ede8; border-color: #ccc; }
+.btn-whatsapp{
+  width:100%;padding:14px;border-radius:10px;border:none;
+  background:#25D366;color:#fff;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Inter',sans-serif;font-size:15px;font-weight:500;
+  cursor:pointer;text-decoration:none;transition:background .2s;
+}
+.btn-whatsapp:hover{background:#1ebe5d;}
 
-    /* Sidebar toggle */
-    .sidebar-toggle {
-      position: fixed; right: 0; top: 50%; transform: translateY(-50%);
-      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
-      color: #fff; border: 1px solid rgba(255,255,255,0.2);
-      border-right: none; border-radius: 12px 0 0 12px;
-      padding: 16px 10px; cursor: pointer; z-index: 50;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
-      writing-mode: vertical-rl; transition: background 0.2s;
-    }
-    .sidebar-toggle:hover { background: rgba(255,255,255,0.25); }
-    .badge { background: #c0392b; color: #fff; border-radius: 20px; padding: 2px 7px; font-size: 11px; font-weight: 600; writing-mode: horizontal-tb; min-width: 20px; text-align: center; }
-    .badge.hidden { display: none; }
+/* ── SIDEBAR ── */
+.sidebar-toggle{
+  position:fixed;right:0;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);
+  color:#fff;border:1px solid rgba(255,255,255,0.2);border-right:none;
+  border-radius:12px 0 0 12px;padding:16px 10px;cursor:pointer;z-index:50;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:'Inter',sans-serif;font-size:11px;font-weight:500;
+  writing-mode:vertical-rl;transition:background .2s;
+}
+.sidebar-toggle:hover{background:rgba(255,255,255,0.25);}
+.badge{background:#c0392b;color:#fff;border-radius:20px;padding:2px 7px;font-size:11px;font-weight:600;writing-mode:horizontal-tb;min-width:20px;text-align:center;}
+.badge.hidden{display:none;}
 
-    .sidebar {
-      position: fixed; right: -320px; top: 0; height: 100%; width: 300px;
-      background: #fff; box-shadow: -4px 0 30px rgba(0,0,0,0.2);
-      z-index: 200; transition: right 0.3s ease;
-      display: flex; flex-direction: column;
-    }
-    .sidebar.open { right: 0; }
-    .sidebar-header { background: #1a1a1a; padding: 1.5rem 1.2rem 1.2rem; }
-    .sidebar-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-    .sidebar-title { font-family: 'Playfair Display', serif; font-size: 16px; color: #fff; }
-    .sidebar-close { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 22px; line-height: 1; }
-    .sidebar-close:hover { color: #fff; }
-    .sidebar-count { font-size: 12px; color: rgba(255,255,255,0.5); }
-    .sidebar-body { flex: 1; overflow-y: auto; }
-    .guest-list { list-style: none; }
-    .guest-item { display: flex; align-items: center; gap: 10px; padding: 12px 1.2rem; border-bottom: 1px solid #f5f3f0; animation: fadeIn 0.3s ease; }
-    .guest-item:last-child { border-bottom: none; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
-    .guest-avatar { width: 34px; height: 34px; border-radius: 50%; background: #f0ede8; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; color: #1a1a1a; flex-shrink: 0; }
-    .guest-info { flex: 1; overflow: hidden; }
-    .guest-name { font-size: 14px; color: #1a1a1a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .guest-insta { font-size: 11px; color: #aaa; }
-    .guest-num { font-size: 11px; color: #ccc; flex-shrink: 0; }
-    .empty-list { text-align: center; padding: 3rem 1.5rem; color: #bbb; font-size: 13px; line-height: 1.6; }
+.sidebar{
+  position:fixed;right:-320px;top:0;height:100%;width:300px;
+  background:#fff;box-shadow:-4px 0 30px rgba(0,0,0,0.2);
+  z-index:200;transition:right .3s ease;display:flex;flex-direction:column;
+}
+.sidebar.open{right:0;}
+.sidebar-header{background:#1a1a1a;padding:1.5rem 1.2rem 1.2rem;flex-shrink:0;}
+.sidebar-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.sidebar-title{font-family:'Playfair Display',serif;font-size:16px;color:#fff;}
+.sidebar-close{background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:22px;line-height:1;}
+.sidebar-close:hover{color:#fff;}
+.sidebar-count{font-size:12px;color:rgba(255,255,255,0.5);}
+.sidebar-admin-btn{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  margin-top:10px;padding:7px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);
+  font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;transition:all .2s;width:100%;
+}
+.sidebar-admin-btn:hover{background:rgba(255,255,255,0.15);color:#fff;}
 
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 49; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-    .overlay.visible { opacity: 1; pointer-events: all; }
+.sidebar-body{flex:1;overflow-y:auto;}
+.guest-list{list-style:none;}
+.guest-item{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 1.2rem;border-bottom:1px solid #f5f3f0;
+  animation:fadeIn .3s ease;
+}
+.guest-item:last-child{border-bottom:none;}
+@keyframes fadeIn{from{opacity:0;transform:translateX(10px);}to{opacity:1;transform:translateX(0);}}
+.guest-avatar{width:34px;height:34px;border-radius:50%;background:#f0ede8;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#1a1a1a;flex-shrink:0;}
+.guest-info{flex:1;overflow:hidden;}
+.guest-name{font-size:14px;color:#1a1a1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.guest-insta{font-size:11px;color:#aaa;}
+.guest-num{font-size:11px;color:#ccc;flex-shrink:0;}
+.guest-del{background:none;border:none;color:#ddd;cursor:pointer;font-size:16px;padding:0 4px;flex-shrink:0;}
+.guest-del:hover{color:#c0392b;}
+.empty-list{text-align:center;padding:3rem 1.5rem;color:#bbb;font-size:13px;line-height:1.6;}
 
-    @media (max-width: 480px) {
-      .hero-date { font-size: 60px; }
-      .sidebar { width: 280px; }
-    }
-  </style>
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:49;opacity:0;pointer-events:none;transition:opacity .3s;}
+.overlay.visible{opacity:1;pointer-events:all;}
+
+/* ── ADMIN MODAL ── */
+.admin-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.7);
+  z-index:300;display:flex;align-items:center;justify-content:center;
+  padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.admin-overlay.open{opacity:1;pointer-events:all;}
+.admin-box{
+  background:#fff;border-radius:16px;width:100%;max-width:360px;
+  padding:1.8rem;transform:scale(0.95);transition:transform .2s;
+}
+.admin-overlay.open .admin-box{transform:scale(1);}
+.admin-title{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:4px;text-align:center;}
+.admin-sub{font-size:13px;color:#aaa;text-align:center;margin-bottom:1.4rem;}
+.admin-input{
+  width:100%;padding:11px 14px;border:1px solid #e5e3df;border-radius:10px;
+  font-size:14px;font-family:'Inter',sans-serif;background:#faf8f5;color:#1a1a1a;
+  outline:none;margin-bottom:10px;transition:border-color .2s;
+}
+.admin-input:focus{border-color:#1a1a1a;}
+.admin-err{font-size:12px;color:#c0392b;text-align:center;margin-bottom:10px;display:none;}
+.admin-actions{display:flex;gap:8px;margin-top:4px;}
+.btn-admin-cancel{flex:1;padding:11px;border-radius:10px;border:1px solid #e5e3df;background:transparent;font-family:'Inter',sans-serif;font-size:14px;color:#999;cursor:pointer;}
+.btn-admin-enter{flex:1;padding:11px;border-radius:10px;border:none;background:#1a1a1a;color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;}
+
+/* admin panel inside sidebar */
+.admin-panel{display:none;padding:1.2rem;border-top:1px solid #f0ede8;}
+.admin-panel.show{display:block;}
+.admin-panel-title{font-size:12px;font-weight:500;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
+.btn-clear-all{
+  width:100%;padding:11px;border-radius:10px;border:none;
+  background:#fff0f0;color:#c0392b;font-family:'Inter',sans-serif;
+  font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;margin-bottom:8px;
+}
+.btn-clear-all:hover{background:#ffdada;}
+.btn-admin-logout{
+  width:100%;padding:9px;border-radius:10px;border:1px solid #e5e3df;
+  background:transparent;color:#aaa;font-family:'Inter',sans-serif;font-size:13px;cursor:pointer;
+}
+.btn-admin-logout:hover{background:#faf8f5;}
+
+@media(max-width:480px){
+  .hero-date{font-size:60px;}
+  .sidebar{width:calc(100% - 40px);}
+}
+</style>
 </head>
 <body>
 
 <div class="bg"></div>
-
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
 <!-- Sidebar toggle -->
@@ -284,19 +240,43 @@
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-header-top">
-      <span class="sidebar-title">Lista de Convidados</span>
+      <span class="sidebar-title">Convidados</span>
       <button class="sidebar-close" onclick="closeSidebar()">×</button>
     </div>
     <div class="sidebar-count" id="sidebar-count">Nenhuma confirmação ainda</div>
+    <button class="sidebar-admin-btn" onclick="openAdminLogin()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Área admin
+    </button>
   </div>
   <div class="sidebar-body">
+    <div class="admin-panel" id="admin-panel">
+      <div class="admin-panel-title">Painel Administrativo</div>
+      <button class="btn-clear-all" onclick="clearAll()">🗑 Limpar toda a lista</button>
+      <button class="btn-admin-logout" onclick="adminLogout()">Sair do painel</button>
+    </div>
     <ul class="guest-list" id="guest-list">
       <li class="empty-list">Seja o primeiro a confirmar! 🎉</li>
     </ul>
   </div>
 </div>
 
-<!-- Page content -->
+<!-- Admin login modal -->
+<div class="admin-overlay" id="admin-overlay">
+  <div class="admin-box">
+    <div class="admin-title">Área Restrita</div>
+    <div class="admin-sub">Acesso somente para administradores</div>
+    <input class="admin-input" type="text" id="admin-user" placeholder="Usuário" autocomplete="off"/>
+    <input class="admin-input" type="password" id="admin-pass" placeholder="Senha" autocomplete="off"/>
+    <div class="admin-err" id="admin-err">Usuário ou senha incorretos.</div>
+    <div class="admin-actions">
+      <button class="btn-admin-cancel" onclick="closeAdminLogin()">Cancelar</button>
+      <button class="btn-admin-enter" onclick="doAdminLogin()">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Page -->
 <div class="page-wrap">
   <div class="hero-text">
     <div class="hero-date">25</div>
@@ -305,29 +285,28 @@
     <div class="hero-sub">Celebrando a vida em boa companhia</div>
     <div class="hero-script">Beauty &amp; Celebration</div>
   </div>
-
   <button class="btn-confirm" onclick="openModal()">✓ Confirmar Presença</button>
 </div>
 
-<!-- Modal -->
+<!-- RSVP Modal -->
 <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
-  <div class="modal" id="modal">
+  <div class="modal">
     <div class="modal-header">
       <div class="modal-title">Beauty &amp; Celebration</div>
-      <div class="modal-sub">25 de Abril • Confirme sua presença</div>
+      <div class="modal-sub">25 de Abril · Confirme sua presença</div>
     </div>
-    <div class="modal-body">
+    <div class="modal-scroll">
 
       <!-- Form -->
       <div class="form-wrap" id="form-wrap">
         <div class="form-group">
           <label>Seu nome</label>
-          <input type="text" id="nome" placeholder="Como você quer ser chamado(a)?" />
+          <input type="text" id="nome" placeholder="Como você quer ser chamado(a)?"/>
           <p class="error-msg" id="err-nome">Por favor, informe seu nome.</p>
         </div>
         <div class="form-group">
           <label>Perfil do Instagram</label>
-          <input type="text" id="insta" placeholder="@seuperfil" />
+          <input type="text" id="insta" placeholder="@seuperfil"/>
           <p class="error-msg" id="err-insta">Por favor, informe seu Instagram.</p>
         </div>
         <button class="btn btn-dark" onclick="confirmar()">Confirmar presença ✓</button>
@@ -336,24 +315,24 @@
 
       <!-- Success -->
       <div class="success-wrap" id="success-wrap">
+
         <div class="success-top">
           <div class="success-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
           </div>
           <div class="success-title">Presença confirmada!</div>
           <div class="success-sub" id="success-name-msg"></div>
         </div>
 
+        <!-- Story art -->
         <div class="story-section">
-          <div class="story-label">SEU STORY PARA O INSTAGRAM</div>
+          <div class="story-label">Seu story para o Instagram</div>
           <div class="story-frame">
             <canvas id="story-canvas"></canvas>
           </div>
           <div class="story-actions">
             <button class="btn-story" onclick="shareToInstagram()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor" stroke="none"/></svg>
               Compartilhar no story
             </button>
             <button class="btn-story" onclick="downloadStory()">
@@ -363,240 +342,254 @@
           </div>
         </div>
 
-        <div style="border-top:1px solid #f0ede8;padding-top:1.2rem;margin-top:0.4rem;">
-          <p style="font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#bbb;text-align:center;margin-bottom:12px;">GRUPO DO EVENTO</p>
+        <!-- WhatsApp -->
+        <div class="section-divider">
+          <div class="section-tag">Grupo do evento</div>
           <a class="btn-whatsapp" href="https://chat.whatsapp.com/K2pDRLQ87Vl0hvmXc9byHK?mode=gi_t" target="_blank">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.126 1.533 5.869L0 24l6.266-1.509A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.001-1.368l-.358-.213-3.724.897.936-3.617-.235-.372A9.817 9.817 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
             Entrar no grupo do WhatsApp
           </a>
         </div>
-        <button class="btn btn-ghost" style="margin-top:10px;" onclick="closeModal()">Fechar</button>
+
+        <button class="btn btn-ghost" onclick="closeModal()">Fechar</button>
       </div>
 
-    </div>
+    </div><!-- end modal-scroll -->
   </div>
 </div>
 
 <script>
-  var guests = JSON.parse(localStorage.getItem('erika_guests_v2') || '[]');
-  var currentName = '';
-  var currentInsta = '';
-  var storyImg = new Image();
-  storyImg.crossOrigin = 'anonymous';
-  storyImg.src = 'https://raw.githubusercontent.com/Prof-Diego-Prado/convitesalao/main/convite%20erika.jpeg';
+var ADMIN_USER = 'Admin';
+var ADMIN_PASS = '@Lei30242728';
+var adminLogged = false;
 
-  function saveGuests() { localStorage.setItem('erika_guests_v2', JSON.stringify(guests)); }
+var guests = JSON.parse(localStorage.getItem('erika_guests_v3') || '[]');
+var currentName = '';
+var currentInsta = '';
 
-  function renderGuests() {
-    var list = document.getElementById('guest-list');
-    var count = document.getElementById('sidebar-count');
-    var badge = document.getElementById('badge');
-    if (guests.length === 0) {
-      list.innerHTML = '<li class="empty-list">Seja o primeiro a confirmar! 🎉</li>';
-      count.textContent = 'Nenhuma confirmação ainda';
-      badge.classList.add('hidden');
-      return;
-    }
-    badge.textContent = guests.length;
-    badge.classList.remove('hidden');
-    count.textContent = guests.length === 1 ? '1 confirmado(a)' : guests.length + ' confirmados';
-    list.innerHTML = guests.map(function(g, i) {
-      var initials = g.nome.trim().split(' ').filter(Boolean).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
-      return '<li class="guest-item">' +
-        '<div class="guest-avatar">' + initials + '</div>' +
-        '<div class="guest-info"><div class="guest-name">' + g.nome + '</div>' +
-        (g.insta ? '<div class="guest-insta">' + g.insta + '</div>' : '') + '</div>' +
-        '<span class="guest-num">#' + String(i+1).padStart(2,'0') + '</span></li>';
-    }).join('');
+var storyImg = new Image();
+storyImg.crossOrigin = 'anonymous';
+storyImg.src = 'https://raw.githubusercontent.com/Prof-Diego-Prado/convitesalao/main/convite%20erika.jpeg';
+
+/* ── GUESTS ── */
+function saveGuests(){ localStorage.setItem('erika_guests_v3', JSON.stringify(guests)); }
+
+function renderGuests(){
+  var list = document.getElementById('guest-list');
+  var count = document.getElementById('sidebar-count');
+  var badge = document.getElementById('badge');
+  if(guests.length === 0){
+    list.innerHTML = '<li class="empty-list">Seja o primeiro a confirmar! 🎉</li>';
+    count.textContent = 'Nenhuma confirmação ainda';
+    badge.classList.add('hidden');
+    return;
+  }
+  badge.textContent = guests.length;
+  badge.classList.remove('hidden');
+  count.textContent = guests.length === 1 ? '1 confirmado(a)' : guests.length + ' confirmados';
+  list.innerHTML = guests.map(function(g, i){
+    var initials = g.nome.trim().split(' ').filter(Boolean).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+    var delBtn = adminLogged ? '<button class="guest-del" title="Remover" onclick="removeGuest('+i+')">×</button>' : '';
+    return '<li class="guest-item">' +
+      '<div class="guest-avatar">'+initials+'</div>' +
+      '<div class="guest-info"><div class="guest-name">'+g.nome+'</div>' +
+      (g.insta ? '<div class="guest-insta">'+g.insta+'</div>' : '') + '</div>' +
+      '<span class="guest-num">#'+String(i+1).padStart(2,'0')+'</span>' +
+      delBtn + '</li>';
+  }).join('');
+}
+
+function removeGuest(i){
+  if(!confirm('Remover "'+guests[i].nome+'" da lista?')) return;
+  guests.splice(i, 1);
+  saveGuests(); renderGuests();
+}
+
+function clearAll(){
+  if(!confirm('Limpar TODA a lista de confirmados? Essa ação não pode ser desfeita.')) return;
+  guests = [];
+  saveGuests(); renderGuests();
+}
+
+/* ── RSVP MODAL ── */
+function openModal(){
+  document.getElementById('modal-overlay').classList.add('open');
+  document.getElementById('form-wrap').classList.remove('hide');
+  document.getElementById('success-wrap').classList.remove('show');
+  document.getElementById('nome').value = '';
+  document.getElementById('insta').value = '';
+  document.getElementById('err-nome').style.display = 'none';
+  document.getElementById('err-insta').style.display = 'none';
+}
+function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); }
+function handleOverlayClick(e){ if(e.target === document.getElementById('modal-overlay')) closeModal(); }
+
+function confirmar(){
+  var nome = document.getElementById('nome').value.trim();
+  var insta = document.getElementById('insta').value.trim();
+  document.getElementById('err-nome').style.display = nome ? 'none' : 'block';
+  document.getElementById('err-insta').style.display = insta ? 'none' : 'block';
+  if(!nome || !insta) return;
+
+  currentName = nome;
+  currentInsta = insta.startsWith('@') ? insta : '@'+insta;
+
+  if(!guests.find(function(g){return g.nome === nome;})){
+    guests.push({nome: nome, insta: currentInsta});
+    saveGuests(); renderGuests();
   }
 
-  function openModal() {
-    document.getElementById('modal-overlay').classList.add('open');
-    document.getElementById('form-wrap').classList.remove('hide');
-    document.getElementById('success-wrap').classList.remove('show');
-    document.getElementById('nome').value = '';
-    document.getElementById('insta').value = '';
-    document.getElementById('err-nome').style.display = 'none';
-    document.getElementById('err-insta').style.display = 'none';
+  document.getElementById('success-name-msg').textContent = 'Te vemos lá, '+nome.split(' ')[0]+'! 🎉';
+  document.getElementById('form-wrap').classList.add('hide');
+  document.getElementById('success-wrap').classList.add('show');
+  // scroll to top of modal content
+  document.querySelector('.modal-scroll').scrollTop = 0;
+  drawStory();
+}
+
+/* ── STORY CANVAS ── */
+function drawStory(){
+  var canvas = document.getElementById('story-canvas');
+  var W = 1080, H = 1920;
+  canvas.width = W; canvas.height = H;
+  var ctx = canvas.getContext('2d');
+
+  function render(){
+    ctx.clearRect(0,0,W,H);
+    if(storyImg.naturalWidth){
+      var s = Math.max(W/storyImg.naturalWidth, H/storyImg.naturalHeight);
+      var dw = storyImg.naturalWidth*s, dh = storyImg.naturalHeight*s;
+      ctx.drawImage(storyImg,(W-dw)/2,(H-dh)/2,dw,dh);
+    }
+    var g = ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'rgba(0,0,0,0.2)');
+    g.addColorStop(0.35,'rgba(0,0,0,0.05)');
+    g.addColorStop(0.65,'rgba(0,0,0,0.45)');
+    g.addColorStop(1,'rgba(0,0,0,0.85)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+    // top date
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(255,255,255,0.88)';
+    ctx.font = '400 36px Inter,sans-serif';
+    ctx.fillText('25 DE ABRIL', W/2, 110);
+    ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(W/2-90,135); ctx.lineTo(W/2+90,135); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,0.55)';
+    ctx.font = '300 28px Inter,sans-serif';
+    ctx.fillText('Beauty & Celebration', W/2, 182);
+
+    // big text
+    ctx.save();
+    ctx.font = '700 210px "Dancing Script",cursive';
+    ctx.fillStyle = '#fff';
+    ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 40;
+    ctx.fillText('Eu vou!', W/2, H*0.60);
+    ctx.restore();
+
+    ctx.fillStyle = 'rgba(255,255,255,0.7)';
+    ctx.font = '300 36px Inter,sans-serif';
+    ctx.fillText('Já confirmei minha presença', W/2, H*0.70);
+
+    // name box
+    var bx=W/2-290, by=H*0.76, bw=580, bh=128;
+    ctx.fillStyle = 'rgba(255,255,255,0.11)';
+    rr(ctx,bx,by,bw,bh,20); ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.28)'; ctx.lineWidth=2;
+    rr(ctx,bx,by,bw,bh,20); ctx.stroke();
+    ctx.fillStyle='#fff'; ctx.font='500 46px Inter,sans-serif';
+    ctx.fillText(currentName, W/2, by+56);
+    ctx.fillStyle='rgba(255,255,255,0.58)'; ctx.font='300 34px Inter,sans-serif';
+    ctx.fillText(currentInsta, W/2, by+104);
+
+    ctx.fillStyle='rgba(255,255,255,0.4)'; ctx.font='300 26px Inter,sans-serif';
+    ctx.fillText('Celebrando a vida em boa companhia', W/2, H-65);
   }
 
-  function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+  if(storyImg.complete && storyImg.naturalWidth){ render(); }
+  else { storyImg.onload = render; storyImg.onerror = render; }
+}
 
-  function handleOverlayClick(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
+function rr(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath();
+}
 
-  function confirmar() {
-    var nome = document.getElementById('nome').value.trim();
-    var insta = document.getElementById('insta').value.trim();
-    document.getElementById('err-nome').style.display = nome ? 'none' : 'block';
-    document.getElementById('err-insta').style.display = insta ? 'none' : 'block';
-    if (!nome || !insta) return;
+function downloadStory(){
+  var c = document.getElementById('story-canvas');
+  var a = document.createElement('a');
+  a.download = 'eu-vou-beauty-celebration.png';
+  a.href = c.toDataURL('image/png');
+  a.click();
+}
 
-    currentName = nome;
-    currentInsta = insta.startsWith('@') ? insta : '@' + insta;
-
-    if (!guests.find(function(g){return g.nome === nome;})) {
-      guests.push({ nome: nome, insta: currentInsta });
-      saveGuests();
-      renderGuests();
-    }
-
-    document.getElementById('success-name-msg').textContent = 'Te vemos lá, ' + nome.split(' ')[0] + '! 🎉';
-    document.getElementById('form-wrap').classList.add('hide');
-    document.getElementById('success-wrap').classList.add('show');
-    drawStory();
-  }
-
-  function drawStory() {
-    var canvas = document.getElementById('story-canvas');
-    var W = 1080, H = 1920;
-    canvas.width = W;
-    canvas.height = H;
-    var ctx = canvas.getContext('2d');
-
-    function render() {
-      ctx.clearRect(0, 0, W, H);
-
-      // Background image
-      var imgW = storyImg.naturalWidth || W;
-      var imgH = storyImg.naturalHeight || H;
-      var scale = Math.max(W / imgW, H / imgH);
-      var dw = imgW * scale, dh = imgH * scale;
-      var dx = (W - dw) / 2, dy = (H - dh) / 2;
-      ctx.drawImage(storyImg, dx, dy, dw, dh);
-
-      // Dark overlay gradient
-      var grad = ctx.createLinearGradient(0, 0, 0, H);
-      grad.addColorStop(0, 'rgba(0,0,0,0.25)');
-      grad.addColorStop(0.4, 'rgba(0,0,0,0.1)');
-      grad.addColorStop(0.7, 'rgba(0,0,0,0.5)');
-      grad.addColorStop(1, 'rgba(0,0,0,0.82)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, W, H);
-
-      // Top area: date
-      ctx.fillStyle = 'rgba(255,255,255,0.9)';
-      ctx.font = '500 36px Inter, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('25 DE ABRIL', W/2, 120);
-
-      // Thin line
-      ctx.strokeStyle = 'rgba(255,255,255,0.4)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(W/2 - 80, 145); ctx.lineTo(W/2 + 80, 145); ctx.stroke();
-
-      ctx.fillStyle = 'rgba(255,255,255,0.6)';
-      ctx.font = '300 28px Inter, sans-serif';
-      ctx.fillText('Beauty & Celebration', W/2, 195);
-
-      // Big "EU VOU!" text
-      ctx.save();
-      ctx.textAlign = 'center';
-      // Script large
-      ctx.font = 'bold 200px "Dancing Script", cursive';
-      ctx.fillStyle = '#fff';
-      ctx.shadowColor = 'rgba(0,0,0,0.4)';
-      ctx.shadowBlur = 30;
-      ctx.fillText('Eu vou!', W/2, H * 0.62);
-      ctx.restore();
-
-      // Subtitle
-      ctx.fillStyle = 'rgba(255,255,255,0.75)';
-      ctx.font = '300 38px Inter, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('Já confirmei minha presença', W/2, H * 0.72);
-
-      // Name tag box
-      var bx = W/2 - 280, by = H * 0.78, bw = 560, bh = 130;
-      ctx.fillStyle = 'rgba(255,255,255,0.12)';
-      roundRect(ctx, bx, by, bw, bh, 20);
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-      ctx.lineWidth = 2;
-      roundRect(ctx, bx, by, bw, bh, 20);
-      ctx.stroke();
-
-      ctx.fillStyle = '#fff';
-      ctx.font = '500 44px Inter, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(currentName, W/2, by + 58);
-      ctx.fillStyle = 'rgba(255,255,255,0.6)';
-      ctx.font = '300 34px Inter, sans-serif';
-      ctx.fillText(currentInsta, W/2, by + 106);
-
-      // Bottom tag
-      ctx.fillStyle = 'rgba(255,255,255,0.45)';
-      ctx.font = '300 28px Inter, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('Celebrando a vida em boa companhia', W/2, H - 70);
-    }
-
-    if (storyImg.complete && storyImg.naturalWidth) {
-      render();
+function shareToInstagram(){
+  var c = document.getElementById('story-canvas');
+  c.toBlob(function(blob){
+    var file = new File([blob],'eu-vou-beauty-celebration.png',{type:'image/png'});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      navigator.share({files:[file], title:'Eu vou! Beauty & Celebration – 25 ABR'}).catch(function(){});
     } else {
-      storyImg.onload = render;
-      storyImg.onerror = function() {
-        // Render without image
-        var ctx2 = canvas.getContext('2d');
-        var g2 = ctx2.createLinearGradient(0, 0, 0, H);
-        g2.addColorStop(0, '#1a1a1a'); g2.addColorStop(1, '#2d2020');
-        ctx2.fillStyle = g2; ctx2.fillRect(0, 0, W, H);
-        render();
-      };
+      downloadStory();
+      setTimeout(function(){
+        alert('Imagem salva! 📸\nAbra o Instagram → Stories e selecione a imagem da galeria.');
+      }, 500);
     }
-  }
+  },'image/png');
+}
 
-  function roundRect(ctx, x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.lineTo(x + w - r, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-    ctx.lineTo(x + w, y + h - r);
-    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    ctx.lineTo(x + r, y + h);
-    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
-    ctx.closePath();
-  }
+/* ── SIDEBAR ── */
+function toggleSidebar(){
+  var s = document.getElementById('sidebar'), o = document.getElementById('overlay');
+  if(s.classList.contains('open')){ closeSidebar(); }
+  else { s.classList.add('open'); o.classList.add('visible'); }
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('visible');
+}
 
-  function shareToInstagram() {
-    var canvas = document.getElementById('story-canvas');
-    canvas.toBlob(function(blob) {
-      var file = new File([blob], 'eu-vou-beauty-celebration.png', { type: 'image/png' });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], title: 'Eu vou! Beauty & Celebration – 25 ABR' }).catch(function(){});
-      } else {
-        var link = document.createElement('a');
-        link.download = 'eu-vou-beauty-celebration.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        setTimeout(function(){
-          alert('Imagem salva! 📸\nAbra o Instagram > Stories e selecione a imagem da galeria para postar.');
-        }, 600);
-      }
-    }, 'image/png');
-  }
+/* ── ADMIN ── */
+function openAdminLogin(){
+  if(adminLogged){ toggleAdminPanel(); return; }
+  document.getElementById('admin-user').value = '';
+  document.getElementById('admin-pass').value = '';
+  document.getElementById('admin-err').style.display = 'none';
+  document.getElementById('admin-overlay').classList.add('open');
+}
+function closeAdminLogin(){ document.getElementById('admin-overlay').classList.remove('open'); }
 
-  function downloadStory() {
-    var canvas = document.getElementById('story-canvas');
-    var link = document.createElement('a');
-    link.download = 'eu-vou-beauty-celebration.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+function doAdminLogin(){
+  var u = document.getElementById('admin-user').value.trim();
+  var p = document.getElementById('admin-pass').value;
+  if(u === ADMIN_USER && p === ADMIN_PASS){
+    adminLogged = true;
+    closeAdminLogin();
+    document.getElementById('admin-panel').classList.add('show');
+    renderGuests(); // re-render with delete buttons
+  } else {
+    document.getElementById('admin-err').style.display = 'block';
   }
+}
 
-  function toggleSidebar() {
-    var s = document.getElementById('sidebar');
-    var o = document.getElementById('overlay');
-    if (s.classList.contains('open')) { closeSidebar(); }
-    else { s.classList.add('open'); o.classList.add('visible'); }
-  }
-  function closeSidebar() {
-    document.getElementById('sidebar').classList.remove('open');
-    document.getElementById('overlay').classList.remove('visible');
-  }
+document.getElementById('admin-pass').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') doAdminLogin();
+});
 
+function toggleAdminPanel(){
+  document.getElementById('admin-panel').classList.toggle('show');
+}
+
+function adminLogout(){
+  adminLogged = false;
+  document.getElementById('admin-panel').classList.remove('show');
   renderGuests();
+}
+
+renderGuests();
 </script>
 </body>
 </html>
