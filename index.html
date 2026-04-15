@@ -330,14 +330,13 @@ input[type="text"]:focus{border-color:#1a1a1a;background:#fff;}
           <div class="story-frame">
             <canvas id="story-canvas"></canvas>
           </div>
-          <div class="story-actions">
-            <button class="btn-story" onclick="shareToInstagram()">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor" stroke="none"/></svg>
-              Compartilhar no story
-            </button>
-            <button class="btn-story" onclick="downloadStory()">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Salvar imagem
+          <button onclick="shareToInstagram()" style="width:100%;margin-top:10px;padding:14px;border-radius:10px;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.3" fill="#fff" stroke="none"/></svg>
+            Compartilhar no Instagram
+          </button>
+          <div style="text-align:center;margin-top:8px;">
+            <button onclick="downloadStory()" style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:#bbb;cursor:pointer;text-decoration:underline;text-underline-offset:3px;">
+              Só salvar a imagem
             </button>
           </div>
         </div>
@@ -456,54 +455,107 @@ function drawStory(){
 
   function render(){
     ctx.clearRect(0,0,W,H);
+
+    // Background image — cover fill, anchored to top
     if(storyImg.naturalWidth){
       var s = Math.max(W/storyImg.naturalWidth, H/storyImg.naturalHeight);
       var dw = storyImg.naturalWidth*s, dh = storyImg.naturalHeight*s;
-      ctx.drawImage(storyImg,(W-dw)/2,(H-dh)/2,dw,dh);
+      var dx = (W-dw)/2, dy = 0; // anchor top
+      ctx.drawImage(storyImg, dx, dy, dw, dh);
     }
+
+    // Gradient overlay — heavier at bottom so text always readable
     var g = ctx.createLinearGradient(0,0,0,H);
-    g.addColorStop(0,'rgba(0,0,0,0.2)');
-    g.addColorStop(0.35,'rgba(0,0,0,0.05)');
-    g.addColorStop(0.65,'rgba(0,0,0,0.45)');
-    g.addColorStop(1,'rgba(0,0,0,0.85)');
+    g.addColorStop(0,   'rgba(0,0,0,0.30)');
+    g.addColorStop(0.30,'rgba(0,0,0,0.08)');
+    g.addColorStop(0.52,'rgba(0,0,0,0.55)');
+    g.addColorStop(0.72,'rgba(0,0,0,0.75)');
+    g.addColorStop(1,   'rgba(0,0,0,0.92)');
     ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
 
-    // top date
     ctx.textAlign = 'center';
-    ctx.fillStyle = 'rgba(255,255,255,0.88)';
-    ctx.font = '400 36px Inter,sans-serif';
-    ctx.fillText('25 DE ABRIL', W/2, 110);
-    ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.moveTo(W/2-90,135); ctx.lineTo(W/2+90,135); ctx.stroke();
-    ctx.fillStyle = 'rgba(255,255,255,0.55)';
-    ctx.font = '300 28px Inter,sans-serif';
-    ctx.fillText('Beauty & Celebration', W/2, 182);
 
-    // big text
+    // ── ZONE 1: top badge (y 80–230) ──
+    // date pill background
+    var px=W/2-200, py=60, pw=400, ph=80;
+    ctx.fillStyle='rgba(255,255,255,0.12)';
+    rr(ctx,px,py,pw,ph,40); ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=1.5;
+    rr(ctx,px,py,pw,ph,40); ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,0.92)';
+    ctx.font='500 34px Inter,sans-serif';
+    ctx.fillText('25 DE ABRIL', W/2, py+50);
+
+    ctx.fillStyle='rgba(255,255,255,0.55)';
+    ctx.font='300 26px Inter,sans-serif';
+    ctx.fillText('Beauty & Celebration', W/2, 200);
+
+    // ── ZONE 2: big "Eu vou!" (y ~700–900) ──
     ctx.save();
-    ctx.font = '700 210px "Dancing Script",cursive';
-    ctx.fillStyle = '#fff';
-    ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 40;
-    ctx.fillText('Eu vou!', W/2, H*0.60);
+    ctx.font='700 190px "Dancing Script",cursive';
+    ctx.fillStyle='#fff';
+    ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=50;
+    ctx.fillText('Eu vou!', W/2, 870);
     ctx.restore();
 
-    ctx.fillStyle = 'rgba(255,255,255,0.7)';
-    ctx.font = '300 36px Inter,sans-serif';
-    ctx.fillText('Já confirmei minha presença', W/2, H*0.70);
+    // ── ZONE 3: subtitle (y ~970) ──
+    ctx.fillStyle='rgba(255,255,255,0.75)';
+    ctx.font='300 34px Inter,sans-serif';
+    ctx.fillText('Já confirmei minha presença', W/2, 970);
 
-    // name box
-    var bx=W/2-290, by=H*0.76, bw=580, bh=128;
-    ctx.fillStyle = 'rgba(255,255,255,0.11)';
-    rr(ctx,bx,by,bw,bh,20); ctx.fill();
-    ctx.strokeStyle='rgba(255,255,255,0.28)'; ctx.lineWidth=2;
-    rr(ctx,bx,by,bw,bh,20); ctx.stroke();
-    ctx.fillStyle='#fff'; ctx.font='500 46px Inter,sans-serif';
-    ctx.fillText(currentName, W/2, by+56);
-    ctx.fillStyle='rgba(255,255,255,0.58)'; ctx.font='300 34px Inter,sans-serif';
-    ctx.fillText(currentInsta, W/2, by+104);
+    // ── ZONE 4: thin divider (y ~1020) ──
+    ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(W/2-160,1020); ctx.lineTo(W/2+160,1020); ctx.stroke();
 
-    ctx.fillStyle='rgba(255,255,255,0.4)'; ctx.font='300 26px Inter,sans-serif';
-    ctx.fillText('Celebrando a vida em boa companhia', W/2, H-65);
+    // ── ZONE 5: name box (y 1060–1230) ──
+    var bx=W/2-310, by=1060, bw=620, bh=160;
+    ctx.fillStyle='rgba(255,255,255,0.10)';
+    rr(ctx,bx,by,bw,bh,24); ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.30)'; ctx.lineWidth=2;
+    rr(ctx,bx,by,bw,bh,24); ctx.stroke();
+
+    // truncate long names
+    ctx.font='500 48px Inter,sans-serif';
+    ctx.fillStyle='#fff';
+    var nameText = currentName;
+    while(ctx.measureText(nameText).width > bw-60 && nameText.length > 4){
+      nameText = nameText.slice(0,-1);
+    }
+    if(nameText !== currentName) nameText += '…';
+    ctx.fillText(nameText, W/2, by+68);
+
+    ctx.font='300 34px Inter,sans-serif';
+    ctx.fillStyle='rgba(255,255,255,0.60)';
+    var instaText = currentInsta;
+    while(ctx.measureText(instaText).width > bw-60 && instaText.length > 4){
+      instaText = instaText.slice(0,-1);
+    }
+    if(instaText !== currentInsta) instaText += '…';
+    ctx.fillText(instaText, W/2, by+122);
+
+    // ── ZONE 6: event info strip (y 1280–1450) ──
+    var ex=W/2-310, ey=1270, ew=620, eh=150;
+    ctx.fillStyle='rgba(0,0,0,0.30)';
+    rr(ctx,ex,ey,ew,eh,20); ctx.fill();
+
+    ctx.fillStyle='rgba(255,255,255,0.45)';
+    ctx.font='400 24px Inter,sans-serif';
+    ctx.fillText('EVENTO', W/2, ey+38);
+
+    ctx.fillStyle='rgba(255,255,255,0.88)';
+    ctx.font='500 36px Inter,sans-serif';
+    ctx.fillText('25 de Abril de 2025', W/2, ey+84);
+
+    ctx.fillStyle='rgba(255,255,255,0.55)';
+    ctx.font='300 28px Inter,sans-serif';
+    ctx.fillText('Celebrando a vida em boa companhia', W/2, ey+128);
+
+    // ── ZONE 7: footer script (y ~1820) ──
+    ctx.save();
+    ctx.font='600 72px "Dancing Script",cursive';
+    ctx.fillStyle='rgba(255,255,255,0.30)';
+    ctx.fillText('Beauty & Celebration', W/2, 1840);
+    ctx.restore();
   }
 
   if(storyImg.complete && storyImg.naturalWidth){ render(); }
